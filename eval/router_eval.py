@@ -27,6 +27,7 @@ from sklearn.metrics import average_precision_score, roc_auc_score, roc_curve
 from sklearn.pipeline import make_pipeline
 from sklearn.preprocessing import StandardScaler
 
+from eval import mlflow_tracking
 from eval.router_common import (ARTIFACTS, QUALITY_TARGET, ROOT, embeddings_for, load_router_data, pick_threshold,
                                 route_outcome, sweep)
 from routewise.cache.models import SentenceTransformerEmbedder
@@ -193,7 +194,33 @@ def main() -> None:
                "val_selection": cand["results"]}
     (REPORTS / "router_eval.json").write_text(json.dumps(summary, indent=2, default=float))
     write_report(summary, data)
+    log_to_mlflow(summary, chosen_art.get("metadata", {}).get("mlflow_run_id"))
     print(json.dumps(headline, indent=2, default=float))
+
+
+def log_to_mlflow(summary: dict, train_run_id: str | None) -> None:
+    """Attach test results to the training run that produced this router (or a new run)."""
+    h = summary["headline"]
+    with mlflow_tracking.run(run_name="router-eval", run_id=train_run_id) as tracker:
+        tracker.set_tags({"evaluated": "true"})
+        tracker.log_metrics({
+            "test_cost_saved_frac": h["chosen_cost_saved"], "test_quality_frac": h["chosen_quality_frac"],
+            "test_meets_quality_target": float(h["meets_target"]),
+            "test_always_cheap_quality_frac": h["always_cheap_quality_frac"],
+            "test_length_heuristic_quality_frac": h["length_quality_frac"],
+            "test_length_heuristic_cost_saved_frac": h["length_cost_saved"],
+            "test_random_quality_frac_at_same_cost": h["random_quality_frac_at_chosen_cost"],
+            "test_oracle_quality_frac": h["oracle_quality_frac"], "test_oracle_cost_saved_frac": h["oracle_cost_saved"],
+            "router_latency_p50_ms": summary["latency_ms"]["p50_ms"],
+            "router_latency_p95_ms": summary["latency_ms"]["p95_ms"],
+            **{f"test_{name.replace(' ', '_').replace('(', '').replace(')', '')}_roc_auc": r["roc_auc"]
+               for name, r in summary["models"].items()},
+            **{f"test_{src}_cost_saved_frac": r["cost_saved"] for src, r in summary["per_source"].items()},
+        })
+        for f in ("router_eval.md", "router_eval.json"):
+            tracker.log_artifact(REPORTS / f, "reports")
+        for f in ("router_cost_quality.png", "router_roc.png"):
+            tracker.log_artifact(FIGS / f, "figures")
 
 
 def write_report(s: dict, data) -> None:

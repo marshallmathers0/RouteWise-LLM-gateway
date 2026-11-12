@@ -47,6 +47,16 @@
       "problemMatcher": []
     },
     {
+      "label": "RouteWise: MLflow UI",
+      "detail": "Browse router training runs, metrics and registered models at http://localhost:5000",
+      "type": "process",
+      "command": "${workspaceFolder}\\.venv\\Scripts\\python.exe",
+      "args": ["-m", "mlflow", "ui", "--backend-store-uri", "sqlite:///mlflow.db", "--port", "5000"],
+      "options": { "cwd": "${workspaceFolder}" },
+      "presentation": { "reveal": "always", "panel": "dedicated" },
+      "problemMatcher": []
+    },
+    {
       "label": "RouteWise: Router pipeline (resume)",
       "detail": "Collect -> judge -> labels -> train -> evaluate; waits out free-tier daily quotas",
       "type": "process",

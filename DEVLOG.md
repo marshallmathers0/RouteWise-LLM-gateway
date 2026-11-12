@@ -875,6 +875,34 @@ dashboard splits savings into *saved by cache*, *saved by routing* and *fallback
   gateway traffic, to be run after the router pipeline so it does not compete for quota.
 * README, REPORT (technical report), LEARNING (interview notes) and this DEVLOG.
 
+#### Step 7.8 — Experiment tracking with MLflow
+
+`eval/mlflow_tracking.py` wraps MLflow so that tracking is optional and can never break training
+(every call is guarded; `ROUTEWISE_MLFLOW=0` turns it off). `router_train` creates one parent run
+per training session and one nested run per candidate model, logging the full hyperparameter grid
+with each configuration's validation AUC, the chosen threshold and validation cost/quality. The
+production router is logged with an inferred signature and registered as `routewise-router`;
+`router_eval` reopens the same run (by the run id saved in `router_meta.json`) and adds the test
+metrics, report and figures. The store is a local SQLite file, so it is free and serverless.
+
+Two details were found by testing rather than reading docs:
+
+* MLflow 3 saves scikit-learn models with **skops** instead of pickle (unpickling can execute code)
+  and refuses unknown types, such as the MLP's internal `AdamOptimizer` or the
+  `collections.OrderedDict` inside a LightGBM model. The wrapper trusts only types from scikit-learn,
+  LightGBM, NumPy and SciPy (plus that one standard-library container), and a test checks that a
+  registered model loads back with identical predictions for all three model families.
+* Re-opening a run with `start_run(run_id=..., run_name=...)` silently **renames** it; the run name
+  is only passed when creating a run.
+
+#### Step 7.9 — Continuous integration
+
+`.github/workflows/tests.yml` runs `make test` on every push and pull request on Ubuntu with
+Python 3.12, CPU-only PyTorch and a pip cache, with read-only permissions and cancellation of
+superseded runs. Before relying on it, every pinned package was checked against PyPI for a Linux
+x86_64 / Python 3.12 wheel (all 31 have one), as were the spaCy model URL and the CPU PyTorch wheel.
+The fast suite needs no secrets because every provider is mocked.
+
 **Lesson of the day:** running the system for real found five issues that 130 unit tests had not —
 two of them only visible through the dashboard. Observability is not decoration.
 
@@ -1221,6 +1249,17 @@ the gateway uses about 1.06 GB.
 `start_demo.bat` starts the gateway and the playground in their own windows, waits for their health
 checks, and opens http://localhost:8501. `stop_demo.bat` stops them.
 
+**Q57b. How do you track and version router experiments?**
+MLflow: a parent run per training session with nested runs per candidate (grid, best params,
+validation metrics), the chosen model registered as `routewise-router` so every retrain is a new
+version, and test metrics attached to the same run. Comparing runs answers "did the new data or
+features actually help?", and the registry answers "which model is in production?".
+
+**Q57c. What runs in CI, and why not the slow tests?**
+`make test` on every push: about 150 tests with mocked providers, fakeredis and SQLite, so CI needs
+no secrets and is deterministic. The slow tests download two transformer models; they run locally
+with `make test-all`.
+
 **Q58. Why not just use LiteLLM or GPTCache?**
 For plumbing they are better than anything I would maintain alone, and in production I would use
 LiteLLM's provider adapters. The project's point is the parts those tools leave naive: verifying
@@ -1452,6 +1491,19 @@ On every start, sentence-transformers asked huggingface.co about the already-dow
 (4.0 s here versus 1.1 s from the local cache). On a slow or unavailable network that check
 can stall start-up. Models are now loaded from the local cache first, and the network is only
 used if a model is not downloaded yet.
+
+### How are router experiments tracked?
+
+With MLflow (free, local: `mlflow.db` + `mlruns/`). Each training session is a parent run with one
+nested run per candidate model; the production router is registered as `routewise-router` (a new
+version per retrain), and the evaluation adds its test metrics to the same run. Open the UI with
+`make mlflow-ui` (http://localhost:5000) or the IDE task "RouteWise: MLflow UI".
+
+### How is the code tested on every push?
+
+GitHub Actions (`.github/workflows/tests.yml`) installs the pinned dependencies with CPU-only
+PyTorch and runs `make test`. No API keys are needed: providers are mocked, Redis is fakeredis and
+the database is SQLite. The status badge at the top of the README shows the latest result.
 
 ### How do I run the demo in one step?
 

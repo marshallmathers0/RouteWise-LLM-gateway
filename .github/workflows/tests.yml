@@ -1,0 +1,67 @@
+# Runs the fast test suite (`make test`) on every push and pull request.
+# Providers are mocked, Redis is fakeredis and the database is SQLite, so the tests need no
+# API keys, services or network access beyond installing packages. Tests marked `slow`
+# (they download the embedding model and cross-encoder) are not run here.
+name: tests
+
+on:
+  push:
+  pull_request:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: tests-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+          cache: pip
+          cache-dependency-path: |
+            requirements.txt
+            requirements-ui.txt
+            requirements-dev.txt
+
+      # CPU-only PyTorch first: the default wheel bundles CUDA and is several GB larger.
+      - name: Install CPU-only PyTorch
+        run: python -m pip install torch==2.15.0 --index-url https://download.pytorch.org/whl/cpu
+
+      - name: Install dependencies
+        run: python -m pip install -r requirements-dev.txt
+
+      - name: Run tests
+        run: make test
+        env:
+          PYTHONWARNINGS: ignore
+          MLFLOW_DISABLE_AGENT_HINT: "1"
+
+  # Auto-deploy to a Hugging Face Space after the tests pass on main.
+  # Opt-in: set the repository VARIABLE `HF_SPACE` (e.g. "your-hf-username/routewise") and the
+  # repository SECRET `HF_TOKEN` (a Hugging Face token with write access). Without HF_SPACE
+  # this job is skipped. The Space's own secrets (GROQ_API_KEY, ...) are set once, either with
+  # `python scripts/deploy_hf_space.py --sync-secrets` or in the Space's settings page.
+  deploy-space:
+    needs: test
+    if: github.ref == 'refs/heads/main' && github.event_name == 'push' && vars.HF_SPACE != ''
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Install upload tooling
+        run: python -m pip install huggingface_hub==2.4.0 python-dotenv==1.2.4
+      - name: Deploy to the Hugging Face Space
+        run: python scripts/deploy_hf_space.py --space "${{ vars.HF_SPACE }}"
+        env:
+          HF_TOKEN: ${{ secrets.HF_TOKEN }}

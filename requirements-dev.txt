@@ -9,3 +9,4 @@ datasets==5.2.0
 matplotlib==3.11.2
 math-verify==0.9.0
 locust==2.47.0
+mlflow==3.18.0

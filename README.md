@@ -1,5 +1,7 @@
 # RouteWise
 
+[![tests](https://github.com/marshallmathers0/RouteWise-LLM-gateway/actions/workflows/tests.yml/badge.svg)](https://github.com/marshallmathers0/RouteWise-LLM-gateway/actions/workflows/tests.yml)
+
 **A cost-aware, OpenAI-compatible LLM gateway with a learned router and a verified semantic cache.**
 
 Point any OpenAI SDK at RouteWise instead of an LLM provider. For every request it:
@@ -242,12 +244,37 @@ Useful request options:
 | Evaluate router (Phase 5) | `make eval-router` | `reports/router_eval.md`, figures |
 | Load test (Phase 7) | `make load-test` | `reports/load_test.md` |
 | Tests | `make test` (fast) / `make test-all` (+ real models) | |
+| Browse training runs | `make mlflow-ui` | MLflow UI at http://localhost:5000 |
 
 No `make` on Windows? Each target is a single `python -m ...` command; copy it from the
 [Makefile](Makefile). The collected answers, judgments and labels are committed, so
 `make train-router && make eval-router` reproduce the router results **without API keys**.
 
 ---
+
+### Experiment tracking (MLflow)
+
+Every `make train-router` run is logged to MLflow (local SQLite store `mlflow.db` + `mlruns/`,
+no server needed):
+
+* one **parent run** per training session: dataset sizes, label balance, the cheap/strong model
+  pair, the quality target, the git commit;
+* one **nested run per candidate** (logistic regression, handcrafted-only ablation, LightGBM, MLP):
+  its hyperparameter grid with every configuration's validation AUC, the chosen settings, threshold,
+  validation quality and cost;
+* the production router logged as an MLflow model and **registered** as `routewise-router`, so every
+  retrain is a new registry version (`models:/routewise-router/<version>`);
+* `make eval-router` attaches the test-set metrics, report and plots to the **same** run.
+
+Browse with `make mlflow-ui`. Tracking is optional: `ROUTEWISE_MLFLOW=0` disables it, and
+`MLFLOW_TRACKING_URI` points it at another server.
+
+### Continuous integration
+
+[`.github/workflows/tests.yml`](.github/workflows/tests.yml) runs `make test` on every push and pull
+request (Ubuntu, Python 3.12, CPU-only PyTorch, pip cache). The suite mocks every LLM provider, uses
+fakeredis and SQLite, and needs no secrets; the `slow` tests that download models run locally with
+`make test-all`.
 
 ## Configuration
 
@@ -261,32 +288,64 @@ No `make` on Windows? Each target is a single `python -m ...` command; copy it f
 
 ## Deployment (free): Hugging Face Spaces
 
-One Docker container serves both the gateway (internal) and the Streamlit playground +
-dashboard (public, port 7860). Why Spaces and not Render's free tier: RouteWise loads two
-transformer models plus spaCy at startup; the gateway process measured **~1.06 GB resident**
-on Windows after a few requests, about twice Render's 512 MB free instance. A free CPU Space has 16 GB.
+One Docker container runs the gateway (internal, port 8000) and the Streamlit playground +
+dashboard (public, port 7860). Why Spaces and not Render's free tier: the gateway loads two
+transformer models plus spaCy and measured **~1.06 GB resident**, about twice Render's 512 MB free
+instance; a free CPU Space has 16 GB.
 
-1. Build the cold-start data once (uses your API keys, about 100 requests):
-   `python scripts/build_demo_data.py`
-2. Assemble the Space files: `python scripts/prepare_hf_space.py` (writes `build/hf_space/`)
-3. Create a new Space at huggingface.co/new-space: SDK **Docker**, hardware **CPU basic (free)**.
-4. In the Space's *Settings -> Variables and secrets*, add `GROQ_API_KEY` (required),
-   `GEMINI_API_KEY` (optional fallback) and `ROUTEWISE_API_KEYS` (any string, e.g. `rw-demo-key`).
-5. Push:
+### Deploy in one command
+
+1. Create a Hugging Face account and an **access token with write permission**
+   (huggingface.co -> Settings -> Access Tokens).
+2. Log in once, then deploy (from the project folder, with your `.env` containing `GROQ_API_KEY`):
+
    ```bash
-   cd build/hf_space
-   git init && git lfs install
-   git remote add origin https://huggingface.co/spaces/<your-username>/routewise
-   git add . && git commit -m "Deploy RouteWise"
-   git push -u origin main      # use a Hugging Face access token with write scope as the password
+   .venv\Scripts\hf auth login
+   .venv\Scripts\python scripts\deploy_hf_space.py --space <your-hf-username>/routewise --sync-secrets
    ```
-6. The first build takes ~10 minutes. Free Spaces sleep after inactivity and take ~1 minute to wake,
-   so record a short demo video for your resume and link it at the top of this README.
 
-The Space has no Redis (exact cache off, in-memory rate limits) and its disk resets on
-restart: the semantic cache and dashboard start from the pre-generated demo data.
+   This builds `build/hf_space/`, creates the Space if needed (Docker SDK, free CPU), copies
+   `GROQ_API_KEY` / `GEMINI_API_KEY` / `ROUTEWISE_API_KEYS` from `.env` into the Space's **encrypted
+   secrets** (they are never written to any file), and uploads the bundle.
+3. Open `https://huggingface.co/spaces/<your-hf-username>/routewise`. The first build takes ~10 minutes;
+   free Spaces sleep when idle and take about a minute to wake, so record a short demo video and link it
+   at the top of this README.
 
----
+Until a trained router is pushed, the Space routes with the rule-based length heuristic (`/health` shows
+which router is active). The Space has no Redis (exact cache off, in-memory rate limits) and its disk
+resets on restart, so the semantic cache and dashboard start empty unless demo data is included.
+
+Note: the Space and your local training use the same Groq key and therefore the same free daily quota;
+use the Space lightly while the router is still being trained.
+
+### Automatic redeploys from GitHub (optional)
+
+The `deploy-space` job in [`.github/workflows/tests.yml`](.github/workflows/tests.yml) redeploys the Space
+after the tests pass on every push to `main`. Enable it once in your GitHub repo (Settings -> Secrets and
+variables -> Actions):
+
+* **Variable** `HF_SPACE` = `<your-hf-username>/routewise`
+* **Secret** `HF_TOKEN` = your Hugging Face write token
+
+Without `HF_SPACE` the job is skipped.
+
+## After the router training finishes
+
+`start_router_training.bat` (or the desktop shortcut *Resume RouteWise Training*) runs the whole
+pipeline unattended and resumes where it stopped. When it prints **DONE** it has already:
+trained and evaluated the router, logged the run to MLflow, saved `artifacts/router.joblib`, and written
+the real results into this README, `REPORT.md`, `DEVLOG.md` and `reports/resume_bullets.md`. Then:
+
+1. Restart the local demo (`stop_demo.bat`, `start_demo.bat`); `/health` should show the learned router.
+2. Commit and push:
+
+   ```bash
+   git add .
+   git commit -m "Add trained router and results"
+   git push
+   ```
+3. Update the Space: automatic if the GitHub workflow is enabled; otherwise re-run
+   `.venv\Scripts\python scripts\deploy_hf_space.py --space <your-hf-username>/routewise`.
 
 ## Project layout
 

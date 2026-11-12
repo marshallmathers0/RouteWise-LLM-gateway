@@ -115,7 +115,8 @@ class Settings(BaseSettings):
     routewise_config: str = str(PROJECT_ROOT / "config" / "routewise.yaml")
     # Comma-separated list of client API keys accepted by the gateway.
     routewise_api_keys: str = "rw-dev-key"
-    redis_url: str | None = "redis://localhost:6379/0"
+    # Optional. Unset = no Redis: exact cache off, rate-limit/breaker state in memory.
+    redis_url: str | None = None
     database_url: str = f"sqlite:///{(PROJECT_ROOT / 'data' / 'routewise.db').as_posix()}"
 
     @property

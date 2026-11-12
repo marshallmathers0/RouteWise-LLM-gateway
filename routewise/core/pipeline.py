@@ -143,9 +143,11 @@ class Gateway:
         key = exact_cache_key(req)
         if not elig.exact:
             meta.cache_status = CacheStatus(status="bypassed", reason=elig.reason)
-        elif not use_exact:
-            # Still a "miss", not "bypassed": the semantic cache may run and overwrite the
-            # reason (e.g. "semantic_rejected:guard:word_order").
+        elif not use_exact and self.exact_cache.configured:
+            # Redis is configured but unreachable. Still a "miss", not "bypassed": the semantic
+            # cache may run and overwrite the reason (e.g. "semantic_rejected:guard:word_order").
+            # Without Redis configured at all there is nothing to report: the exact cache is
+            # simply not part of this deployment.
             meta.cache_status = CacheStatus(status="miss", reason="exact_cache_unavailable")
 
         if use_exact:

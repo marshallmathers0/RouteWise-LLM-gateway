@@ -58,9 +58,12 @@ class CachedAnswer:
 
 
 class ExactCache:
-    def __init__(self, redis: Redis | None, ttl_s: int) -> None:
+    def __init__(self, redis: Redis | None, ttl_s: int, configured: bool = True) -> None:
         self._redis = redis
         self.ttl_s = ttl_s
+        # configured=False: Redis was never set up (no REDIS_URL), which is a normal mode,
+        # not an outage. configured=True with no client means Redis is set up but down.
+        self.configured = configured
 
     @property
     def available(self) -> bool:

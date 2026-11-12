@@ -20,7 +20,12 @@ _TIME_SENSITIVE = re.compile(
     r"today|tonight|tomorrow|yesterday|now|right now|currently|current|latest|recent|recently|"
     r"this (week|month|year|morning|evening)|last (week|month|year|night)|next (week|month|year)|"
     r"news|breaking|live|real[- ]time|weather|forecast|stock price|share price|exchange rate|"
-    r"score|as of|up[- ]to[- ]date|nowadays|these days|trending"
+    r"score|as of|up[- ]to[- ]date|nowadays|these days|trending|"
+    # Prices and availability change over time ("iphone 17 price" was cached in the live demo).
+    r"prices?|pricing|costs?|how much (is|are|does|do)|discounts?|deals?|on sale|in stock|availability|"
+    # Events and releases that move: schedules, results, rankings, upcoming launches.
+    r"release date|upcoming|schedule|fixtures?|who won|winner|standings|rankings?|election|"
+    r"this season|still (open|available|alive)"
     r")\b",
     re.IGNORECASE,
 )

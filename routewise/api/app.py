@@ -131,6 +131,8 @@ def create_app(
     @asynccontextmanager
     async def lifespan(app: FastAPI) -> AsyncIterator[None]:
         r = await _connect_redis(settings.redis_url) if redis is _AUTO else redis
+        # "Configured" = the operator asked for Redis (REDIS_URL set, or a client injected).
+        redis_configured = bool(settings.redis_url) if redis is _AUTO else redis is not None
         http = httpx.AsyncClient()
         if clients is not None:
             provider_clients = clients
@@ -154,13 +156,15 @@ def create_app(
         app.state.cfg = cfg
         app.state.settings = settings
         app.state.redis = r
+        app.state.redis_configured = redis_configured
         app.state.repo = log_repo
         app.state.router = active_router
         app.state.rate_limiter = TokenBucketRateLimiter(cfg.rate_limit.capacity, cfg.rate_limit.refill_per_second, r)
         sem = (await asyncio.to_thread(build_semantic_cache, cfg.cache, embedder)
                if semantic_cache is _AUTO else semantic_cache)
         app.state.semantic_cache = sem
-        app.state.gateway = Gateway(cfg, provider_clients, breaker, ExactCache(r, cfg.cache.exact_ttl_s),
+        app.state.gateway = Gateway(cfg, provider_clients, breaker,
+                                    ExactCache(r, cfg.cache.exact_ttl_s, configured=redis_configured),
                                     active_router, sem)
         yield
         await http.aclose()
@@ -198,15 +202,18 @@ def create_app(
     @app.get("/health")
     async def health(request: Request) -> dict[str, Any]:
         r: Redis | None = request.app.state.redis
-        redis_ok = False
-        if r is not None:
+        if not request.app.state.redis_configured:
+            redis_state = "not configured"  # optional: exact cache off, everything else works
+        else:
             try:
-                redis_ok = bool(await r.ping())
+                redis_state = "connected" if r is not None and await r.ping() else "unreachable"
             except Exception:  # noqa: BLE001
-                redis_ok = False
+                redis_state = "unreachable"
         sem = request.app.state.semantic_cache
-        return {"status": "ok", "redis": redis_ok, "database": request.app.state.repo.healthy(),
-                "semantic_cache": sem is not None, "semantic_entries": len(sem.store) if sem else 0}
+        return {"status": "ok", "redis": redis_state, "exact_cache": "on" if redis_state == "connected" else "off",
+                "semantic_cache": "on (FAISS + SQLite)" if sem is not None else "off",
+                "semantic_entries": len(sem.store) if sem else 0, "database": request.app.state.repo.healthy(),
+                "router": getattr(request.app.state.router, "name", None) or type(request.app.state.router).__name__}
 
     @app.get("/v1/models")
     async def list_models(request: Request, _: str = Depends(authenticate)) -> dict[str, Any]:

@@ -152,6 +152,17 @@ def dashboard() -> None:
                      "(e.g. fallbacks to a pricier model) - check the fallback chain order.")
     k[4].metric("Fallbacks", s["fallbacks"])
     k[5].metric("Errors", s["errors"])
+    # Where the saving (or overspend) comes from: these three add up to the total above.
+    b = st.columns(3)
+    b[0].metric("Saved by cache", f"${s['saved_by_cache_usd']:.4f}",
+                help="Always-strong cost of the requests answered from cache (a cache hit costs $0).")
+    b[1].metric("Saved by routing", f"${s['saved_by_routing_usd']:.4f}",
+                help="Strong-model price minus the price of the model the router chose, for answers "
+                     "from each tier's first-choice model.")
+    b[2].metric("Fallback overhead", f"${s['fallback_overhead_usd']:.4f}",
+                help="Extra cost of answers served by a backup model, compared with the strong model. "
+                     "Positive = backups cost more. The cost guard (reliability.fallback_price_cap_ratio) "
+                     "blocks backups pricier than the strong model.")
 
     a, b = st.columns(2)
     with a:

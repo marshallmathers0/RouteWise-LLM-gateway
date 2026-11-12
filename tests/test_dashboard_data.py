@@ -32,3 +32,25 @@ def test_summary_of_empty_logs():
     import pandas as pd
 
     assert summary(pd.DataFrame()) == {"requests": 0}
+
+
+def test_savings_breakdown_adds_up_and_isolates_fallback_overhead():
+    import pandas as pd
+
+    df = pd.DataFrame([
+        # cache hit: saves its whole always-strong cost
+        {"status_code": 200, "cache_status": "semantic_hit", "fallback_used": False, "route": "cheap",
+         "estimated_cost_usd": 0.0, "counterfactual_strong_cost_usd": 1.0},
+        # routed to the cheap first-choice model at half the strong price
+        {"status_code": 200, "cache_status": "miss", "fallback_used": False, "route": "cheap",
+         "estimated_cost_usd": 0.5, "counterfactual_strong_cost_usd": 1.0},
+        # fallback to a backup 4x pricier than the strong model
+        {"status_code": 200, "cache_status": "miss", "fallback_used": True, "route": "cheap",
+         "estimated_cost_usd": 4.0, "counterfactual_strong_cost_usd": 1.0},
+    ])
+    s = summary(df)
+    assert s["saved_by_cache_usd"] == 1.0 and s["saved_by_routing_usd"] == 0.5
+    assert s["fallback_overhead_usd"] == 3.0
+    total_saved = s["counterfactual_strong_usd"] - s["cost_usd"]
+    assert total_saved == s["saved_by_cache_usd"] + s["saved_by_routing_usd"] - s["fallback_overhead_usd"]
+    assert s["saved_frac"] < 0  # overall negative, and the breakdown shows it is the fallback

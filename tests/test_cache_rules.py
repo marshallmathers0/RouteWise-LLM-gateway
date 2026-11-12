@@ -14,12 +14,17 @@ def req(*msgs: tuple[str, str], **kw) -> ChatCompletionRequest:
 
 
 @pytest.mark.parametrize("q", ["What's the weather today?", "latest iPhone price", "Who is the current PM of UK?",
-                               "news about AI this week"])
+                               "news about AI this week",
+                               # added after the live demo cached "iphone 17 price":
+                               "iphone 17 price", "How much does a Tesla Model 3 cost?", "bitcoin prices",
+                               "GTA 6 release date", "upcoming Marvel movies", "Who won the IPL final?",
+                               "Is the Taj Mahal still open?"])
 def test_time_sensitive_detected(q):
     assert is_time_sensitive(q)
 
 
-@pytest.mark.parametrize("q", ["What is the capital of India?", "Explain photosynthesis", "Write a haiku about rain"])
+@pytest.mark.parametrize("q", ["What is the capital of India?", "Explain photosynthesis", "Write a haiku about rain",
+                               "back propagation", "What is pagination?", "Explain the time complexity of quicksort"])
 def test_timeless_not_flagged(q):
     assert not is_time_sensitive(q)
 

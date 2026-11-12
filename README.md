@@ -106,7 +106,23 @@ flowchart TD
 | Semantic cache | `bge-small-en-v1.5` + FAISS (exact IP search) + SQLite | Runs on a free CPU host; SQLite is the source of truth |
 | Verification | spaCy guards + `cross-encoder/quora-distilroberta-base` | Embeddings capture topic, not exact meaning |
 | Router | Query embedding + 29 handcrafted features -> LR / LightGBM / MLP | Threshold chosen to keep >= 95% of strong-model quality |
-| Logs + dashboard | SQLAlchemy (Postgres or SQLite) + Streamlit | Hit rates, cost vs always-strong, p50/p95 per stage, false-hit audit |
+| Logs + dashboard | SQLAlchemy (Postgres or SQLite) + Streamlit + Plotly | Hit rates, cost vs always-strong (split into cache savings, routing savings and fallback overhead), p50/p95 per stage, false-hit audit |
+| Cost guard | Fallback models priced above the strong model are skipped | Fallbacks can never make a request cost more than always-strong |
+
+### Models and estimated prices
+
+| Model | Provider | Role | USD per 1M tokens (input / output) |
+|---|---|---|---|
+| `openai/gpt-oss-20b` | Groq | Cheap tier, first choice | 0.075 / 0.30 |
+| `openai/gpt-oss-120b` | Groq | Strong tier, first choice; cheap tier's fallback | 0.15 / 0.60 |
+| `gemini-3.5-flash-lite` | Google | Cheap last resort (blocked by the cost guard) | 0.30 / 2.50 |
+| `gemini-3.8-flash` | Google | Strong fallback (blocked by the cost guard) | 0.75 / 3.75 |
+| `qwen/qwen3.8-27b` | Groq | Judge for router labels only (offline) | 0.80 / 4.00 |
+
+List prices checked 2026-11-11; all costs RouteWise reports are estimates at these prices (the
+free tiers cost $0). The semantic cache needs no provider: FAISS, SQLite and two small open-source
+models from Hugging Face run inside the gateway process on the CPU, for free.
+More answers to common questions: [DEVLOG.md, Part 7 (FAQ)](DEVLOG.md#part-7--faq-questions-asked-while-building-and-demoing-it).
 
 ---
 
@@ -157,7 +173,8 @@ docker compose up --build
 
 ### Do I need Redis?
 
-No. Without Redis the gateway logs a warning at start-up and:
+No. Redis is **optional and off by default** (`REDIS_URL` is commented out in `.env.example`).
+Without it, `/health` shows `"redis": "not configured"` and the gateway:
 
 * turns off the **exact** cache (the only part stored in Redis);
 * keeps rate limiting and circuit-breaker state in process memory;

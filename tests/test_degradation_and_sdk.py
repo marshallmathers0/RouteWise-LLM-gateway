@@ -38,7 +38,8 @@ def test_gateway_serves_without_redis(settings, app_config, fake_clients, repo, 
             r = c.post("/v1/chat/completions", json=chat_body(), headers=AUTH)
             assert r.status_code == 200
             assert r.json()["choices"][0]["message"]["content"] == "answer from groq"
-        assert c.get("/health").json()["redis"] is False
+        health = c.get("/health").json()
+        assert health["redis"] in ("not configured", "unreachable") and health["exact_cache"] == "off"
 
 
 def _free_port() -> int:
@@ -86,3 +87,23 @@ def test_official_openai_sdk_works(live_server):
 
     with pytest.raises(openai.BadRequestError):
         client.chat.completions.create(model="no-such-model", messages=[{"role": "user", "content": "hi"}])
+
+
+def test_no_redis_configured_is_a_normal_mode(settings, app_config, fake_clients, repo):
+    # No REDIS_URL: exact cache simply not part of the deployment - no "unavailable" noise.
+    app = create_app(settings, app_config=app_config, clients=fake_clients, redis=None, repo=repo,
+                     router=LengthHeuristicRouter(), semantic_cache=None)
+    with TestClient(app) as c:
+        meta = c.post("/v1/chat/completions", json=chat_body(), headers=AUTH).json()["routewise"]
+        assert meta["cache_status"] == {"status": "miss", "reason": None}
+        health = c.get("/health").json()
+        assert health["redis"] == "not configured" and health["exact_cache"] == "off"
+
+
+def test_configured_but_dead_redis_is_reported(settings, app_config, fake_clients, repo):
+    app = create_app(settings, app_config=app_config, clients=fake_clients, redis=BrokenRedis(), repo=repo,
+                     router=LengthHeuristicRouter(), semantic_cache=None)
+    with TestClient(app) as c:
+        meta = c.post("/v1/chat/completions", json=chat_body(), headers=AUTH).json()["routewise"]
+        assert meta["cache_status"]["status"] == "miss"
+        assert c.get("/health").json()["redis"] == "unreachable"

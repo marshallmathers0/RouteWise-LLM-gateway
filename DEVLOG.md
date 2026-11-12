@@ -842,7 +842,10 @@ whose output price ($2.50 per 1M tokens) is about four times the strong model's 
 that costs more than the strong tier defeats the purpose. The cheap chain now falls back to
 gpt-oss-120b first and to Gemini only last, and `tier_of_model` maps an explicitly requested model to
 the tier where it is the **primary** choice (gpt-oss-120b appears in both chains). The dashboard's help
-text now explains what a negative value means.
+text now explains what a negative value means. Finally a **cost guard** was added (`reliability.fallback_price_cap_ratio: 1.0`): any fallback
+whose input or output price is above the always-strong reference model is skipped
+(`skipped_over_budget`), so a fallback can never make a request cost more than always-strong; the
+dashboard splits savings into *saved by cache*, *saved by routing* and *fallback overhead*.
 
 #### Step 7.6 — The live demo, end to end
 
@@ -1276,3 +1279,183 @@ copy .env.example .env          # then add GROQ_API_KEY and GEMINI_API_KEY
 .venv\Scripts\python scripts\run_router_pipeline.py
 .venv\Scripts\python -m eval.load_test
 ```
+
+---
+
+## Part 7 — FAQ: questions asked while building and demoing it
+
+These came up while running the demo. They are also likely interview questions.
+
+### Which LLM models does RouteWise use, what does each cost, and which is strongest?
+
+| Model | Provider | Role | List price, USD per 1M tokens (input / output) | Free-tier limits seen |
+|---|---|---|---|---|
+| `openai/gpt-oss-20b` | Groq | **Cheap** tier, first choice | 0.075 / 0.30 | 1,000 req/day, 8k tokens/min, 200k tokens/day |
+| `openai/gpt-oss-120b` | Groq | **Strong** tier, first choice; also the cheap tier's first fallback | 0.15 / 0.60 | same, separate quota |
+| `gemini-3.5-flash-lite` | Google | Cheap-tier last resort (blocked by the cost guard) | 0.30 / 2.50 | not published |
+| `gemini-3.8-flash` | Google | Strong-tier fallback (blocked by the cost guard) | 0.75 / 3.75 (promo price until 2026-12-31) | 20 req/day |
+| `qwen/qwen3.8-27b` | Groq | **Judge only** for router labels; never answers users | 0.80 / 4.00 | same as Groq above |
+
+Prices were taken from the providers' pricing pages on 2026-11-11. Every cost RouteWise
+shows is an **estimate** at these prices; the free tiers used here actually cost $0.
+
+Strength, honestly: the only head-to-head numbers measured in this project are small pilots.
+On 30 GSM8K/MMLU questions gpt-oss-20b scored 27/30 and gpt-oss-120b 28/30; on hard MATH
+problems gpt-oss-120b scored 14/16 (gpt-oss-20b could not be measured that day because of
+quota). By size and by these pilots, **gpt-oss-120b >= gpt-oss-20b**. The Gemini models were
+not benchmarked here, so I do not rank them.
+
+### What are the three APIs — Google, Grok and Ollama?
+
+* **Groq** (with a q: an inference company serving open models such as gpt-oss) — not xAI's Grok.
+* **Google Gemini** through its OpenAI-compatible endpoint.
+* **OpenRouter** is configured (a key exists) but no tier uses it: its free models were
+  unreliable when tested.
+* **Ollama is not implemented.** It was an optional idea in the plan. Because Ollama serves an
+  OpenAI-compatible API (`http://localhost:11434/v1`), adding it is a provider entry in
+  `config/routewise.yaml` plus a tier target — no code changes.
+
+### After I send a query, what exactly happens?
+
+1. Check the API key and the per-key rate limit (token bucket, 30 requests/minute).
+2. **May this request be cached?** (see the next question). If not, skip to step 5.
+3. **Exact cache** (Redis): an identical earlier request is returned immediately. Only if
+   Redis is configured.
+4. **Semantic cache**: a cached question with the same meaning (embedding search -> rule
+   guards -> verifier) is returned for $0 in ~50 ms.
+5. **Router** chooses the tier: cheap or strong.
+6. **Fallback chain** of that tier, in order, with retries and per-model circuit breakers:
+   * cheap: gpt-oss-20b -> gpt-oss-120b -> (Gemini Flash-Lite, skipped by the cost guard)
+   * strong: gpt-oss-120b -> (Gemini 3.8 Flash, skipped by the cost guard)
+   If every allowed model fails, the client gets HTTP 503 with the reason per model.
+7. The answer is stored in the semantic cache (if allowed), the request is logged, and the
+   response is returned with the `routewise` metadata.
+
+### How is the difficulty of a query decided? Is the router working?
+
+The **learned router is not trained yet**: its data is being collected within Groq's free
+daily token budget. Until `artifacts/router.joblib` exists, `model="auto"` uses the
+**length heuristic** baseline (`routewise/router/baselines.py`), and `/health` shows which
+router is active:
+
+* more than 40 words -> **strong** (`heuristic:long_query`);
+* looks like code or maths (```` ``` ````, `def `, `class `, "prove", "derive",
+  "step by step", an operator next to a number) -> **strong** (`heuristic:code_or_math`);
+* otherwise -> **cheap** (`heuristic:short_query`).
+
+When trained, the learned router predicts P(the cheap model's answer is good enough) from the
+query embedding plus 29 handcrafted features, and routes to cheap when that probability is
+above a threshold chosen on validation data to keep at least 95% of always-strong quality.
+Its metadata then shows `route_reason: learned:<model>` and `router_prob`.
+
+### Why is gpt-oss-120b in both the cheap and the strong tier?
+
+* In the **strong** tier it is the first choice.
+* In the **cheap** tier it is the **fallback**: when gpt-oss-20b is unavailable (for example
+  out of daily quota), the next-best model that does not cost more than the strong tier is
+  gpt-oss-120b itself. The alternative, Gemini Flash-Lite, costs ~4x more per output token.
+* So a "cheap" request answered by gpt-oss-120b (`fallback used` in the playground) costs
+  exactly the always-strong price: no saving, but no overspend either.
+* If you request `model="openai/gpt-oss-120b"` explicitly, it is treated as a strong request,
+  because a model belongs to the tier where it is the **first** choice.
+
+### Why did the dashboard show negative "cost saved", and what fixed it?
+
+"Cost saved" = 1 − (what RouteWise spent ÷ what sending every request to gpt-oss-120b would
+have cost for the same tokens). In the live demo, both Groq models ran out of daily quota and
+cheap requests fell back to Gemini Flash-Lite ($2.50 per 1M output tokens vs $0.60), whose long
+answers cost about 4x the strong price. On the demo log: cache saved $0.00073, routing saved
+$0.00115, fallbacks cost $0.00349 extra — a net negative.
+
+Fixes:
+* **Cost guard** (`reliability.fallback_price_cap_ratio: 1.0`): a fallback model whose input
+  or output price is above the always-strong reference is skipped (`skipped_over_budget`).
+  RouteWise returns 503 rather than overspend; `null` restores availability-over-cost.
+* The dashboard now shows **Saved by cache**, **Saved by routing** and **Fallback overhead**,
+  which add up to the total, so a negative total explains itself.
+
+### What do the dashboard numbers mean?
+
+| Number | Meaning |
+|---|---|
+| Requests | All logged requests in the log database |
+| Cache hit rate | (exact + semantic hits) ÷ successful requests |
+| Semantic hits | Semantic hits ÷ successful requests (equal to the hit rate when Redis is off) |
+| Est. cost saved | 1 − spent ÷ always-strong counterfactual; negative = overspending |
+| Saved by cache / by routing / Fallback overhead | The three parts of the saving above |
+| Fallbacks | Answers served by a model other than the tier's first choice |
+| Errors | Requests that failed (e.g. 503 when every allowed model was out of quota) |
+| Requests over time | Requests per 5 minutes, coloured by cache status |
+| Cost chart | Cumulative spend vs always-strong; blue above orange = overspending |
+| Latency per stage | p50/p95 per pipeline stage, from each request's timings |
+| Route distribution | How many requests went cheap vs strong |
+| False-hit audit | Recent semantic hits, for a human to confirm they really are the same question |
+
+### What decides whether a question and answer are cached?
+
+Two separate decisions:
+
+**Can this request use the cache (lookup and store)?** No if:
+* temperature is above 0.3, or not set (the provider default is about 1.0 = random);
+* the question is time-sensitive: today, latest, current, news, weather, scores, **prices,
+  costs, "how much is", release dates, upcoming, schedules, rankings, elections** (the second
+  group was added after "iphone 17 price" was cached in the demo);
+* the client sends `X-RouteWise-Cache: off` or `Cache-Control: no-cache`;
+* `n > 1` is requested;
+* for the semantic cache only: the conversation has more than one user turn.
+
+**Is this particular answer stored?** Only if the LLM call succeeded, the answer is not empty,
+and it was not cut off by `max_tokens` (`finish_reason == "length"`). Entries expire after 7
+days (semantic) or 24 hours (exact).
+
+**Is a cached answer served?** Exact cache: identical messages and parameters. Semantic cache:
+cosine >= 0.799, all four guards pass, verifier >= 0.904, same namespace (same system prompt,
+model, stop sequences and response format), and the cached answer fits the caller's `max_tokens`.
+
+### What is the semantic cache, who provides it, is it free, is it Docker?
+
+* It is **not a hosted service and has no provider**. It is RouteWise's own code
+  (`routewise/cache/`) running **inside the gateway's Python process**, built from free,
+  open-source parts:
+  * **sentence-transformers** with `BAAI/bge-small-en-v1.5` (embeddings) and
+    `cross-encoder/quora-distilroberta-base` (verifier), downloaded once (~400 MB) from Hugging
+    Face and run on the CPU;
+  * **FAISS** (Meta's open-source vector-search library) as an in-memory index;
+  * **SQLite** (a file, `data/semantic_cache.db`) as the durable store;
+  * **spaCy** `en_core_web_sm` for the entity guard.
+* **Free:** no API calls, no account, no cost per lookup — only CPU time (~50 ms per lookup).
+* **Not Docker:** it runs wherever the gateway runs. Docker is just one optional way to
+  package the whole gateway.
+
+### Is Redis used? Which cache is running?
+
+* **Redis is optional and off by default.** With no `REDIS_URL`, the gateway does not try to
+  connect, `/health` shows `"redis": "not configured"` and `"exact_cache": "off"`, and rate
+  limiting and circuit-breaker state live in process memory.
+* **The semantic cache (FAISS + SQLite) does all the caching** without Redis; identical repeats
+  are served by it at similarity 1.0, which is why they show as `semantic_hit`.
+* With Redis (set `REDIS_URL`, or use Docker Compose, which starts one): identical repeats become
+  `exact_hit` in about a millisecond, and limits/breaker state are shared by all workers.
+* `exact_cache_unavailable` now appears only if Redis **is configured but unreachable**.
+
+### What is the frontend?
+
+* **Streamlit** (an open-source Python framework) serves the playground and dashboard on
+  port 8501, locally; charts are drawn with **Plotly**. It calls the gateway over HTTP for the
+  playground and reads the request-log database directly for the dashboard.
+* The gateway also serves **Swagger UI** at http://localhost:8000/docs (FastAPI's built-in
+  interactive API docs).
+
+### Why did the launcher once fail to start the gateway?
+
+On every start, sentence-transformers asked huggingface.co about the already-downloaded models
+(4.0 s here versus 1.1 s from the local cache). On a slow or unavailable network that check
+can stall start-up. Models are now loaded from the local cache first, and the network is only
+used if a model is not downloaded yet.
+
+### How do I run the demo in one step?
+
+* Double-click the **"RouteWise Demo"** desktop shortcut, or `start_demo.bat`.
+* In VS Code-based IDEs: **Ctrl+Shift+B** ("RouteWise: Start demo"), or *Tasks: Run Task* for
+  stop, CLI demo, tests and the router pipeline (`.vscode/tasks.json`).
+* Stop with **"Stop RouteWise Demo"** / `stop_demo.bat`.

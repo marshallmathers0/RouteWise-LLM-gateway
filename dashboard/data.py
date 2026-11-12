@@ -34,7 +34,20 @@ def summary(df: pd.DataFrame) -> dict[str, Any]:
     hits = status.get("exact_hit", 0) + status.get("semantic_hit", 0)
     cost = float(ok["estimated_cost_usd"].sum())
     counterfactual = float(ok["counterfactual_strong_cost_usd"].sum())
+    # Split total savings into its three causes, so a negative total explains itself:
+    #   cache hits     -> saved the whole always-strong cost of the request;
+    #   routed answers -> saved (strong price - price of the model the router chose);
+    #   fallbacks      -> overhead = what the backup model cost above the strong price.
+    hit = ok["cache_status"].isin(["exact_hit", "semantic_hit"])
+    fb = ok["fallback_used"].astype(bool) & ~hit
+    routed = ~hit & ~fb
+    saved_by_cache = float(ok.loc[hit, "counterfactual_strong_cost_usd"].sum())
+    saved_by_routing = float((ok.loc[routed, "counterfactual_strong_cost_usd"] - ok.loc[routed, "estimated_cost_usd"]).sum())
+    fallback_overhead = float((ok.loc[fb, "estimated_cost_usd"] - ok.loc[fb, "counterfactual_strong_cost_usd"]).sum())
     return {
+        "saved_by_cache_usd": saved_by_cache,
+        "saved_by_routing_usd": saved_by_routing,
+        "fallback_overhead_usd": fallback_overhead,
         "requests": int(len(df)),
         "errors": int((df["status_code"] != 200).sum()),
         "fallbacks": int(ok["fallback_used"].sum()),

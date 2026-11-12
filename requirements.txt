@@ -1,0 +1,27 @@
+# Runtime dependencies (pinned).
+# torch: install the CPU build first (see Dockerfile / README):
+#   pip install torch==2.15.0 --index-url https://download.pytorch.org/whl/cpu
+fastapi==0.162.4
+uvicorn[standard]==0.54.0
+pydantic==2.14.3
+pydantic-settings==2.16.2
+python-dotenv==1.2.4
+httpx==0.28.1
+redis==8.1.0
+SQLAlchemy==2.1.8
+psycopg[binary]==3.3.8
+PyYAML==6.0.3
+
+# ML: semantic cache
+torch==2.15.0
+sentence-transformers==6.2.0
+transformers==5.22.2
+faiss-cpu==1.16.0
+numpy==2.5.4
+spacy==3.8.18
+en_core_web_sm @ https://github.com/explosion/spacy-models/releases/download/en_core_web_sm-3.8.0/en_core_web_sm-3.8.0-py3-none-any.whl
+
+# ML: learned router (needed to load the trained artifact)
+scikit-learn==1.9.1
+lightgbm==4.7.0
+joblib==1.6.0

@@ -1,0 +1,18 @@
+.venv/
+__pycache__/
+*.pyc
+.pytest_cache/
+.env
+data/*.db
+data/raw/
+# Router dataset IS committed (queries, model answers, judgments, labels) so training is
+# reproducible without API keys; only derived/cached files are ignored.
+data/router/query_embeddings.npz
+data/router/*_errors.jsonl
+data/router/pipeline.log
+artifacts/router_candidates.joblib
+.idea/
+.vscode/
+eval/cache_pairs.jsonl
+data/eval/
+data/*.log

@@ -1,0 +1,88 @@
+# RouteWise gateway configuration.
+# Secrets (provider API keys, DB/Redis URLs, client API keys) come from environment
+# variables, never from this file. See .env.example.
+
+providers:
+  # All three expose OpenAI-compatible /chat/completions endpoints, so one client
+  # implementation (providers/openai_compat.py) serves them all.
+  groq:
+    base_url: https://api.groq.com/openai/v1
+    api_key_env: GROQ_API_KEY
+  gemini:
+    base_url: https://generativelanguage.googleapis.com/v1beta/openai
+    api_key_env: GEMINI_API_KEY
+  openrouter:
+    base_url: https://openrouter.ai/api/v1
+    api_key_env: OPENROUTER_API_KEY
+
+# Each tier is an ordered fallback chain: first entry is preferred; later entries are
+# tried only if earlier ones fail or have an open circuit breaker.
+tiers:
+  # Models verified live on 2026-11-11 (Groq retired its Llama 3.x models).
+  # The strong tier is provisional until the Phase 4 model comparison is decided.
+  cheap:
+    - { provider: groq, model: openai/gpt-oss-20b, params: { reasoning_effort: low } }
+    # Fallback order matters for cost: Gemini Flash-Lite's output price is ~4x gpt-oss-120b's,
+    # so the live dashboard showed NEGATIVE savings when cheap traffic fell back to it.
+    # Try the strong Groq model first (separate per-model quota and breaker), Gemini last.
+    - { provider: groq, model: openai/gpt-oss-120b, params: { reasoning_effort: low } }
+    - { provider: gemini, model: gemini-3.5-flash-lite }
+  strong:
+    - { provider: groq, model: openai/gpt-oss-120b, params: { reasoning_effort: low } }
+    - { provider: gemini, model: gemini-3.8-flash }
+
+# ESTIMATED pricing. Free tiers cost 0, so we price each model at its provider's PAID list
+# price (USD per 1M tokens; checked 2026-11-11 on console.groq.com/docs/models and
+# aistudio.google.com/docs/pricing). Every cost RouteWise reports is an estimate.
+# Output prices include reasoning/thinking tokens, which providers bill as output.
+pricing:
+  openai/gpt-oss-20b:     { input: 0.075, output: 0.30 }
+  gemini-3.5-flash-lite:  { input: 0.30,  output: 2.50 }
+  openai/gpt-oss-120b:    { input: 0.15,  output: 0.60 }
+  gemini-3.8-flash:       { input: 0.75,  output: 3.75 }  # promo price until 2026-12-31
+# Used for the "what would always-strong have cost" counterfactual in logs/dashboard.
+counterfactual_strong_model: openai/gpt-oss-120b
+
+reliability:
+  request_timeout_s: 30.0
+  max_retries: 2              # retries per provider (so up to 3 attempts) before falling back
+  backoff_base_s: 0.5
+  backoff_max_s: 8.0
+  breaker_failure_threshold: 5  # consecutive failures that open the circuit
+  breaker_cooldown_s: 30.0      # how long an open circuit stays open before a half-open probe
+
+rate_limit:
+  enabled: true
+  capacity: 30            # bucket size = max burst
+  refill_per_second: 0.5  # sustained rate = 30 requests/minute per API key
+
+cache:
+  exact_enabled: true
+  exact_ttl_s: 86400
+  # Requests with temperature above this are creative/non-deterministic: don't cache them.
+  max_cacheable_temperature: 0.3
+
+  # Verified semantic cache: (1) embedding recall -> (2) rule guards -> (3) cross-encoder.
+  # Thresholds chosen on the dev split in Phase 3 - see reports/cache_eval.md.
+  semantic_enabled: true
+  semantic_db_path: data/semantic_cache.db   # FAISS index is rebuilt from this at startup
+  semantic_ttl_s: 604800                     # 7 days
+  embedding_model: BAAI/bge-small-en-v1.5
+  semantic_top_k: 5
+  similarity_threshold: 0.799                # loose stage-1 recall filter (keeps 95% of dev duplicates, Phase 3)
+  guards_enabled: true
+  guards: [numbers, negation, entities, word_order]
+  verifier_enabled: true
+  verifier_model: cross-encoder/quora-distilroberta-base
+  verifier_threshold: 0.904                  # max F0.5 on dev, Phase 3 (reports/cache_eval.md)
+
+router:
+  # Used when the client sends model="auto". Until a trained router artifact exists,
+  # the gateway falls back to the length heuristic baseline.
+  artifact_path: artifacts/router.joblib
+
+logging:
+  # Store the (truncated) last user message so the dashboard's false-hit audit view can
+  # show it. Turn off if prompts may contain sensitive data.
+  log_prompts: true
+  prompt_max_chars: 500

@@ -1,0 +1,11 @@
+[project]
+name = "routewise"
+version = "0.1.0"
+description = "Cost-aware OpenAI-compatible LLM gateway with a learned router and verified semantic cache"
+requires-python = ">=3.11"
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+asyncio_mode = "auto"
+asyncio_default_fixture_loop_scope = "function"
+markers = ["slow: loads the real embedding/cross-encoder models (deselect with -m 'not slow')"]

@@ -1,0 +1,300 @@
+{"id": "nm_entity_swap_000", "q1": "What is the capital of India?", "q2": "What is the capital of Indonesia?", "label": 0, "category": "entity_swap", "source": "near_miss", "verified": false}
+{"id": "nm_entity_swap_001", "q1": "Who founded Microsoft?", "q2": "Who founded Apple?", "label": 0, "category": "entity_swap", "source": "near_miss", "verified": false}
+{"id": "nm_entity_swap_002", "q1": "How tall is Mount Everest?", "q2": "How tall is K2?", "label": 0, "category": "entity_swap", "source": "near_miss", "verified": false}
+{"id": "nm_entity_swap_003", "q1": "What is the population of Canada?", "q2": "What is the population of Australia?", "label": 0, "category": "entity_swap", "source": "near_miss", "verified": false}
+{"id": "nm_entity_swap_004", "q1": "Who wrote Pride and Prejudice?", "q2": "Who wrote Jane Eyre?", "label": 0, "category": "entity_swap", "source": "near_miss", "verified": false}
+{"id": "nm_entity_swap_005", "q1": "What currency does Japan use?", "q2": "What currency does China use?", "label": 0, "category": "entity_swap", "source": "near_miss", "verified": false}
+{"id": "nm_entity_swap_006", "q1": "How do I install Docker on Ubuntu?", "q2": "How do I install Docker on Windows?", "label": 0, "category": "entity_swap", "source": "near_miss", "verified": false}
+{"id": "nm_entity_swap_007", "q1": "When did Germany win the World Cup?", "q2": "When did Brazil win the World Cup?", "label": 0, "category": "entity_swap", "source": "near_miss", "verified": false}
+{"id": "nm_entity_swap_008", "q1": "Who is the CEO of Google?", "q2": "Who is the CEO of Amazon?", "label": 0, "category": "entity_swap", "source": "near_miss", "verified": false}
+{"id": "nm_entity_swap_009", "q1": "What language is spoken in Brazil?", "q2": "What language is spoken in Argentina?", "label": 0, "category": "entity_swap", "source": "near_miss", "verified": false}
+{"id": "nm_entity_swap_010", "q1": "How far is the Moon from Earth?", "q2": "How far is Mars from Earth?", "label": 0, "category": "entity_swap", "source": "near_miss", "verified": false}
+{"id": "nm_entity_swap_011", "q1": "What is the GDP of Germany?", "q2": "What is the GDP of France?", "label": 0, "category": "entity_swap", "source": "near_miss", "verified": false}
+{"id": "nm_entity_swap_012", "q1": "Explain the history of the Roman Empire", "q2": "Explain the history of the Ottoman Empire", "label": 0, "category": "entity_swap", "source": "near_miss", "verified": false}
+{"id": "nm_entity_swap_013", "q1": "What are the main features of React?", "q2": "What are the main features of Angular?", "label": 0, "category": "entity_swap", "source": "near_miss", "verified": false}
+{"id": "nm_entity_swap_014", "q1": "How do I convert a list to a string in Python?", "q2": "How do I convert a list to a string in Java?", "label": 0, "category": "entity_swap", "source": "near_miss", "verified": false}
+{"id": "nm_entity_swap_015", "q1": "What is the national animal of India?", "q2": "What is the national animal of Pakistan?", "label": 0, "category": "entity_swap", "source": "near_miss", "verified": false}
+{"id": "nm_entity_swap_016", "q1": "Who painted the Mona Lisa?", "q2": "Who painted The Starry Night?", "label": 0, "category": "entity_swap", "source": "near_miss", "verified": false}
+{"id": "nm_entity_swap_017", "q1": "What is the time zone of Tokyo?", "q2": "What is the time zone of Seoul?", "label": 0, "category": "entity_swap", "source": "near_miss", "verified": false}
+{"id": "nm_entity_swap_018", "q1": "What is the tallest building in Dubai?", "q2": "What is the tallest building in Shanghai?", "label": 0, "category": "entity_swap", "source": "near_miss", "verified": false}
+{"id": "nm_entity_swap_019", "q1": "Which river flows through Cairo?", "q2": "Which river flows through Baghdad?", "label": 0, "category": "entity_swap", "source": "near_miss", "verified": false}
+{"id": "nm_entity_swap_020", "q1": "What is Amazon Web Services?", "q2": "What is Microsoft Azure?", "label": 0, "category": "entity_swap", "source": "near_miss", "verified": false}
+{"id": "nm_entity_swap_021", "q1": "Who won the Nobel Prize in Physics in 2020?", "q2": "Who won the Nobel Prize in Chemistry in 2020?", "label": 0, "category": "entity_swap", "source": "near_miss", "verified": false}
+{"id": "nm_entity_swap_022", "q1": "What is the climate of Kerala like?", "q2": "What is the climate of Rajasthan like?", "label": 0, "category": "entity_swap", "source": "near_miss", "verified": false}
+{"id": "nm_entity_swap_023", "q1": "How do I apply for a passport in the UK?", "q2": "How do I apply for a passport in the USA?", "label": 0, "category": "entity_swap", "source": "near_miss", "verified": false}
+{"id": "nm_entity_swap_024", "q1": "What is the difference between PostgreSQL and MySQL?", "q2": "What is the difference between PostgreSQL and MongoDB?", "label": 0, "category": "entity_swap", "source": "near_miss", "verified": false}
+{"id": "nm_entity_swap_025", "q1": "Who was the first president of the United States?", "q2": "Who was the first president of France?", "label": 0, "category": "entity_swap", "source": "near_miss", "verified": false}
+{"id": "nm_entity_swap_026", "q1": "How old is Taylor Swift?", "q2": "How old is Selena Gomez?", "label": 0, "category": "entity_swap", "source": "near_miss", "verified": false}
+{"id": "nm_entity_swap_027", "q1": "What is the main export of Chile?", "q2": "What is the main export of Peru?", "label": 0, "category": "entity_swap", "source": "near_miss", "verified": false}
+{"id": "nm_entity_swap_028", "q1": "Tell me about Isaac Newton's discoveries", "q2": "Tell me about Albert Einstein's discoveries", "label": 0, "category": "entity_swap", "source": "near_miss", "verified": false}
+{"id": "nm_entity_swap_029", "q1": "What is the area of Russia?", "q2": "What is the area of Canada?", "label": 0, "category": "entity_swap", "source": "near_miss", "verified": false}
+{"id": "nm_entity_swap_030", "q1": "How do I learn Kotlin?", "q2": "How do I learn Swift?", "label": 0, "category": "entity_swap", "source": "near_miss", "verified": false}
+{"id": "nm_entity_swap_031", "q1": "What is the best time to visit Goa?", "q2": "What is the best time to visit Kashmir?", "label": 0, "category": "entity_swap", "source": "near_miss", "verified": false}
+{"id": "nm_entity_swap_032", "q1": "Which team does Lionel Messi play for?", "q2": "Which team does Cristiano Ronaldo play for?", "label": 0, "category": "entity_swap", "source": "near_miss", "verified": false}
+{"id": "nm_entity_swap_033", "q1": "What is Netflix's business model?", "q2": "What is Spotify's business model?", "label": 0, "category": "entity_swap", "source": "near_miss", "verified": false}
+{"id": "nm_entity_swap_034", "q1": "What are the ingredients of a Margherita pizza?", "q2": "What are the ingredients of a Hawaiian pizza?", "label": 0, "category": "entity_swap", "source": "near_miss", "verified": false}
+{"id": "nm_entity_swap_035", "q1": "How did World War I start?", "q2": "How did World War II start?", "label": 0, "category": "entity_swap", "source": "near_miss", "verified": false}
+{"id": "nm_entity_swap_036", "q1": "What does NASA do?", "q2": "What does ISRO do?", "label": 0, "category": "entity_swap", "source": "near_miss", "verified": false}
+{"id": "nm_entity_swap_037", "q1": "What is the population of Mumbai?", "q2": "What is the population of Delhi?", "label": 0, "category": "entity_swap", "source": "near_miss", "verified": false}
+{"id": "nm_entity_swap_038", "q1": "What is the official language of Switzerland?", "q2": "What is the official language of Austria?", "label": 0, "category": "entity_swap", "source": "near_miss", "verified": false}
+{"id": "nm_entity_swap_039", "q1": "How do I set up AWS Lambda?", "q2": "How do I set up Google Cloud Functions?", "label": 0, "category": "entity_swap", "source": "near_miss", "verified": false}
+{"id": "nm_number_change_000", "q1": "Python 3.10 features", "q2": "Python 3.12 features", "label": 0, "category": "number_change", "source": "near_miss", "verified": false}
+{"id": "nm_number_change_001", "q1": "Who won the World Cup in 2018?", "q2": "Who won the World Cup in 2022?", "label": 0, "category": "number_change", "source": "near_miss", "verified": false}
+{"id": "nm_number_change_002", "q1": "What is 15% of 200?", "q2": "What is 15% of 300?", "label": 0, "category": "number_change", "source": "near_miss", "verified": false}
+{"id": "nm_number_change_003", "q1": "What is the square root of 144?", "q2": "What is the square root of 169?", "label": 0, "category": "number_change", "source": "near_miss", "verified": false}
+{"id": "nm_number_change_004", "q1": "Convert 100 Fahrenheit to Celsius", "q2": "Convert 50 Fahrenheit to Celsius", "label": 0, "category": "number_change", "source": "near_miss", "verified": false}
+{"id": "nm_number_change_005", "q1": "What happened in 1947 in India?", "q2": "What happened in 1950 in India?", "label": 0, "category": "number_change", "source": "near_miss", "verified": false}
+{"id": "nm_number_change_006", "q1": "Give me 5 tips for better sleep", "q2": "Give me 10 tips for better sleep", "label": 0, "category": "number_change", "source": "near_miss", "verified": false}
+{"id": "nm_number_change_007", "q1": "What are the new features in Java 17?", "q2": "What are the new features in Java 21?", "label": 0, "category": "number_change", "source": "near_miss", "verified": false}
+{"id": "nm_number_change_008", "q1": "Who was the US president in 1990?", "q2": "Who was the US president in 2000?", "label": 0, "category": "number_change", "source": "near_miss", "verified": false}
+{"id": "nm_number_change_009", "q1": "Is 97 a prime number?", "q2": "Is 91 a prime number?", "label": 0, "category": "number_change", "source": "near_miss", "verified": false}
+{"id": "nm_number_change_010", "q1": "What is 7 times 8?", "q2": "What is 7 times 9?", "label": 0, "category": "number_change", "source": "near_miss", "verified": false}
+{"id": "nm_number_change_011", "q1": "How many days are in February 2024?", "q2": "How many days are in February 2023?", "label": 0, "category": "number_change", "source": "near_miss", "verified": false}
+{"id": "nm_number_change_012", "q1": "What is the factorial of five?", "q2": "What is the factorial of six?", "label": 0, "category": "number_change", "source": "near_miss", "verified": false}
+{"id": "nm_number_change_013", "q1": "Explain HTTP/2", "q2": "Explain HTTP/3", "label": 0, "category": "number_change", "source": "near_miss", "verified": false}
+{"id": "nm_number_change_014", "q1": "What changed in React 18?", "q2": "What changed in React 19?", "label": 0, "category": "number_change", "source": "near_miss", "verified": false}
+{"id": "nm_number_change_015", "q1": "What is 2 to the power of 10?", "q2": "What is 2 to the power of 12?", "label": 0, "category": "number_change", "source": "near_miss", "verified": false}
+{"id": "nm_number_change_016", "q1": "Write a poem of 4 lines about rain", "q2": "Write a poem of 8 lines about rain", "label": 0, "category": "number_change", "source": "near_miss", "verified": false}
+{"id": "nm_number_change_017", "q1": "Who won the IPL in 2016?", "q2": "Who won the IPL in 2019?", "label": 0, "category": "number_change", "source": "near_miss", "verified": false}
+{"id": "nm_number_change_018", "q1": "What is the sum of the first 10 natural numbers?", "q2": "What is the sum of the first 100 natural numbers?", "label": 0, "category": "number_change", "source": "near_miss", "verified": false}
+{"id": "nm_number_change_019", "q1": "What is Windows 10's minimum RAM requirement?", "q2": "What is Windows 11's minimum RAM requirement?", "label": 0, "category": "number_change", "source": "near_miss", "verified": false}
+{"id": "nm_number_change_020", "q1": "What is Newton's 3rd law of motion?", "q2": "What is Newton's 2nd law of motion?", "label": 0, "category": "number_change", "source": "near_miss", "verified": false}
+{"id": "nm_number_change_021", "q1": "How many calories are in 2 eggs?", "q2": "How many calories are in 3 eggs?", "label": 0, "category": "number_change", "source": "near_miss", "verified": false}
+{"id": "nm_number_change_022", "q1": "Which city hosted the Olympics in 2012?", "q2": "Which city hosted the Olympics in 2016?", "label": 0, "category": "number_change", "source": "near_miss", "verified": false}
+{"id": "nm_number_change_023", "q1": "Convert 1010 from binary to decimal", "q2": "Convert 1101 from binary to decimal", "label": 0, "category": "number_change", "source": "near_miss", "verified": false}
+{"id": "nm_number_change_024", "q1": "What is the area of a circle with radius 3?", "q2": "What is the area of a circle with radius 5?", "label": 0, "category": "number_change", "source": "near_miss", "verified": false}
+{"id": "nm_number_change_025", "q1": "Summarize chapter 3 of the book", "q2": "Summarize chapter 4 of the book", "label": 0, "category": "number_change", "source": "near_miss", "verified": false}
+{"id": "nm_number_change_026", "q1": "When does Node.js 20 reach end of life?", "q2": "When does Node.js 18 reach end of life?", "label": 0, "category": "number_change", "source": "near_miss", "verified": false}
+{"id": "nm_number_change_027", "q1": "How long does it take to walk 5 km?", "q2": "How long does it take to walk 10 km?", "label": 0, "category": "number_change", "source": "near_miss", "verified": false}
+{"id": "nm_number_change_028", "q1": "What is the derivative of x^2?", "q2": "What is the derivative of x^3?", "label": 0, "category": "number_change", "source": "near_miss", "verified": false}
+{"id": "nm_number_change_029", "q1": "What was the population of India in 2011?", "q2": "What was the population of India in 2001?", "label": 0, "category": "number_change", "source": "near_miss", "verified": false}
+{"id": "nm_number_change_030", "q1": "What is the boiling point of water at 2000 meters altitude?", "q2": "What is the boiling point of water at 4000 meters altitude?", "label": 0, "category": "number_change", "source": "near_miss", "verified": false}
+{"id": "nm_number_change_031", "q1": "What is the GCD of 12 and 18?", "q2": "What is the GCD of 12 and 16?", "label": 0, "category": "number_change", "source": "near_miss", "verified": false}
+{"id": "nm_number_change_032", "q1": "Explain the 2008 financial crisis", "q2": "Explain the 1929 financial crisis", "label": 0, "category": "number_change", "source": "near_miss", "verified": false}
+{"id": "nm_number_change_033", "q1": "How do I upgrade to Ubuntu 22.04?", "q2": "How do I upgrade to Ubuntu 24.04?", "label": 0, "category": "number_change", "source": "near_miss", "verified": false}
+{"id": "nm_number_change_034", "q1": "What is 25 degrees Celsius in Fahrenheit?", "q2": "What is 30 degrees Celsius in Fahrenheit?", "label": 0, "category": "number_change", "source": "near_miss", "verified": false}
+{"id": "nm_number_change_035", "q1": "Who won the Best Actor Oscar in 2010?", "q2": "Who won the Best Actor Oscar in 2015?", "label": 0, "category": "number_change", "source": "near_miss", "verified": false}
+{"id": "nm_number_change_036", "q1": "What is the 10th Fibonacci number?", "q2": "What is the 12th Fibonacci number?", "label": 0, "category": "number_change", "source": "near_miss", "verified": false}
+{"id": "nm_number_change_037", "q1": "What's new in iOS 17?", "q2": "What's new in iOS 18?", "label": 0, "category": "number_change", "source": "near_miss", "verified": false}
+{"id": "nm_number_change_038", "q1": "How many teeth does a 6 year old have?", "q2": "How many teeth does a 12 year old have?", "label": 0, "category": "number_change", "source": "near_miss", "verified": false}
+{"id": "nm_number_change_039", "q1": "What is the angle sum of a polygon with 5 sides?", "q2": "What is the angle sum of a polygon with 6 sides?", "label": 0, "category": "number_change", "source": "near_miss", "verified": false}
+{"id": "nm_negation_000", "q1": "Is coffee bad for health?", "q2": "Is coffee not bad for health?", "label": 0, "category": "negation", "source": "near_miss", "verified": false}
+{"id": "nm_negation_001", "q1": "Which foods contain gluten?", "q2": "Which foods contain no gluten?", "label": 0, "category": "negation", "source": "near_miss", "verified": false}
+{"id": "nm_negation_002", "q1": "Recipes with sugar", "q2": "Recipes without sugar", "label": 0, "category": "negation", "source": "near_miss", "verified": false}
+{"id": "nm_negation_003", "q1": "Why do some people sleep well?", "q2": "Why do some people not sleep well?", "label": 0, "category": "negation", "source": "near_miss", "verified": false}
+{"id": "nm_negation_004", "q1": "What animals can swim?", "q2": "What animals cannot swim?", "label": 0, "category": "negation", "source": "near_miss", "verified": false}
+{"id": "nm_negation_005", "q1": "Is it safe to eat raw eggs?", "q2": "Is it unsafe to eat raw eggs?", "label": 0, "category": "negation", "source": "near_miss", "verified": false}
+{"id": "nm_negation_006", "q1": "Countries that use the euro", "q2": "Countries that don't use the euro", "label": 0, "category": "negation", "source": "near_miss", "verified": false}
+{"id": "nm_negation_007", "q1": "Should I invest in index funds?", "q2": "Should I not invest in index funds?", "label": 0, "category": "negation", "source": "near_miss", "verified": false}
+{"id": "nm_negation_008", "q1": "Which planets have rings?", "q2": "Which planets do not have rings?", "label": 0, "category": "negation", "source": "near_miss", "verified": false}
+{"id": "nm_negation_009", "q1": "Jobs that require a degree", "q2": "Jobs that do not require a degree", "label": 0, "category": "negation", "source": "near_miss", "verified": false}
+{"id": "nm_negation_010", "q1": "Which vitamins are water soluble?", "q2": "Which vitamins are not water soluble?", "label": 0, "category": "negation", "source": "near_miss", "verified": false}
+{"id": "nm_negation_011", "q1": "Python libraries that support async", "q2": "Python libraries that don't support async", "label": 0, "category": "negation", "source": "near_miss", "verified": false}
+{"id": "nm_negation_012", "q1": "Which metals are magnetic?", "q2": "Which metals are non-magnetic?", "label": 0, "category": "negation", "source": "near_miss", "verified": false}
+{"id": "nm_negation_013", "q1": "Fruits that are high in sugar", "q2": "Fruits that are not high in sugar", "label": 0, "category": "negation", "source": "near_miss", "verified": false}
+{"id": "nm_negation_014", "q1": "Why is my laptop charging?", "q2": "Why is my laptop not charging?", "label": 0, "category": "negation", "source": "near_miss", "verified": false}
+{"id": "nm_negation_015", "q1": "Medicines safe during pregnancy", "q2": "Medicines not safe during pregnancy", "label": 0, "category": "negation", "source": "near_miss", "verified": false}
+{"id": "nm_negation_016", "q1": "Exercises that build muscle", "q2": "Exercises that don't build muscle", "label": 0, "category": "negation", "source": "near_miss", "verified": false}
+{"id": "nm_negation_017", "q1": "Countries where English is an official language", "q2": "Countries where English is not an official language", "label": 0, "category": "negation", "source": "near_miss", "verified": false}
+{"id": "nm_negation_018", "q1": "Which birds can fly?", "q2": "Which birds can't fly?", "label": 0, "category": "negation", "source": "near_miss", "verified": false}
+{"id": "nm_negation_019", "q1": "What happens if I take ibuprofen with food?", "q2": "What happens if I take ibuprofen without food?", "label": 0, "category": "negation", "source": "near_miss", "verified": false}
+{"id": "nm_negation_020", "q1": "Programming languages with garbage collection", "q2": "Programming languages without garbage collection", "label": 0, "category": "negation", "source": "near_miss", "verified": false}
+{"id": "nm_negation_021", "q1": "Is it legal to drive barefoot in India?", "q2": "Is it illegal to drive barefoot in India?", "label": 0, "category": "negation", "source": "near_miss", "verified": false}
+{"id": "nm_negation_022", "q1": "Why do cats purr when happy?", "q2": "Why do cats purr when they are not happy?", "label": 0, "category": "negation", "source": "near_miss", "verified": false}
+{"id": "nm_negation_023", "q1": "Signs that a relationship is healthy", "q2": "Signs that a relationship is not healthy", "label": 0, "category": "negation", "source": "near_miss", "verified": false}
+{"id": "nm_negation_024", "q1": "Foods to eat with diabetes", "q2": "Foods not to eat with diabetes", "label": 0, "category": "negation", "source": "near_miss", "verified": false}
+{"id": "nm_negation_025", "q1": "Which countries have nuclear weapons?", "q2": "Which countries do not have nuclear weapons?", "label": 0, "category": "negation", "source": "near_miss", "verified": false}
+{"id": "nm_negation_026", "q1": "Plants that need direct sunlight", "q2": "Plants that don't need direct sunlight", "label": 0, "category": "negation", "source": "near_miss", "verified": false}
+{"id": "nm_negation_027", "q1": "Why do I feel hungry after eating?", "q2": "Why don't I feel hungry after eating?", "label": 0, "category": "negation", "source": "near_miss", "verified": false}
+{"id": "nm_negation_028", "q1": "When should you use recursion?", "q2": "When should you not use recursion?", "label": 0, "category": "negation", "source": "near_miss", "verified": false}
+{"id": "nm_negation_029", "q1": "Animals that are mammals", "q2": "Animals that are not mammals", "label": 0, "category": "negation", "source": "near_miss", "verified": false}
+{"id": "nm_negation_030", "q1": "Cars that run on diesel", "q2": "Cars that do not run on diesel", "label": 0, "category": "negation", "source": "near_miss", "verified": false}
+{"id": "nm_negation_031", "q1": "Reasons to learn Rust", "q2": "Reasons not to learn Rust", "label": 0, "category": "negation", "source": "near_miss", "verified": false}
+{"id": "nm_negation_032", "q1": "Which elements are noble gases?", "q2": "Which elements are not noble gases?", "label": 0, "category": "negation", "source": "near_miss", "verified": false}
+{"id": "nm_negation_033", "q1": "Laptops with a touchscreen", "q2": "Laptops without a touchscreen", "label": 0, "category": "negation", "source": "near_miss", "verified": false}
+{"id": "nm_negation_034", "q1": "Habits that improve focus", "q2": "Habits that do not improve focus", "label": 0, "category": "negation", "source": "near_miss", "verified": false}
+{"id": "nm_negation_035", "q1": "Teas that contain caffeine", "q2": "Teas that contain no caffeine", "label": 0, "category": "negation", "source": "near_miss", "verified": false}
+{"id": "nm_negation_036", "q1": "SQL queries that use indexes", "q2": "SQL queries that don't use indexes", "label": 0, "category": "negation", "source": "near_miss", "verified": false}
+{"id": "nm_negation_037", "q1": "Movies suitable for kids", "q2": "Movies not suitable for kids", "label": 0, "category": "negation", "source": "near_miss", "verified": false}
+{"id": "nm_negation_038", "q1": "Credit cards with an annual fee", "q2": "Credit cards with no annual fee", "label": 0, "category": "negation", "source": "near_miss", "verified": false}
+{"id": "nm_negation_039", "q1": "Diets that include meat", "q2": "Diets that exclude meat", "label": 0, "category": "negation", "source": "near_miss", "verified": false}
+{"id": "nm_unit_change_000", "q1": "convert 5 miles to km", "q2": "convert 5 km to miles", "label": 0, "category": "unit_change", "source": "near_miss", "verified": false}
+{"id": "nm_unit_change_001", "q1": "How many grams are in a pound?", "q2": "How many grams are in a kilogram?", "label": 0, "category": "unit_change", "source": "near_miss", "verified": false}
+{"id": "nm_unit_change_002", "q1": "Convert 30 Celsius to Fahrenheit", "q2": "Convert 30 Fahrenheit to Celsius", "label": 0, "category": "unit_change", "source": "near_miss", "verified": false}
+{"id": "nm_unit_change_003", "q1": "How many ounces in a cup?", "q2": "How many ounces in a liter?", "label": 0, "category": "unit_change", "source": "near_miss", "verified": false}
+{"id": "nm_unit_change_004", "q1": "How many seconds are in an hour?", "q2": "How many seconds are in a day?", "label": 0, "category": "unit_change", "source": "near_miss", "verified": false}
+{"id": "nm_unit_change_005", "q1": "What is 10 feet in meters?", "q2": "What is 10 meters in feet?", "label": 0, "category": "unit_change", "source": "near_miss", "verified": false}
+{"id": "nm_unit_change_006", "q1": "How many teaspoons in a tablespoon?", "q2": "How many tablespoons in a cup?", "label": 0, "category": "unit_change", "source": "near_miss", "verified": false}
+{"id": "nm_unit_change_007", "q1": "Convert 1 GB to MB", "q2": "Convert 1 GB to KB", "label": 0, "category": "unit_change", "source": "near_miss", "verified": false}
+{"id": "nm_unit_change_008", "q1": "How many inches in a foot?", "q2": "How many inches in a yard?", "label": 0, "category": "unit_change", "source": "near_miss", "verified": false}
+{"id": "nm_unit_change_009", "q1": "How many milliliters in a gallon?", "q2": "How many milliliters in a quart?", "label": 0, "category": "unit_change", "source": "near_miss", "verified": false}
+{"id": "nm_unit_change_010", "q1": "Convert 60 mph to km/h", "q2": "Convert 60 km/h to mph", "label": 0, "category": "unit_change", "source": "near_miss", "verified": false}
+{"id": "nm_unit_change_011", "q1": "How many square feet in an acre?", "q2": "How many square meters in an acre?", "label": 0, "category": "unit_change", "source": "near_miss", "verified": false}
+{"id": "nm_unit_change_012", "q1": "How many minutes in a week?", "q2": "How many minutes in a month?", "label": 0, "category": "unit_change", "source": "near_miss", "verified": false}
+{"id": "nm_unit_change_013", "q1": "Convert 5 kg to pounds", "q2": "Convert 5 pounds to kg", "label": 0, "category": "unit_change", "source": "near_miss", "verified": false}
+{"id": "nm_unit_change_014", "q1": "How many centimeters in an inch?", "q2": "How many millimeters in an inch?", "label": 0, "category": "unit_change", "source": "near_miss", "verified": false}
+{"id": "nm_unit_change_015", "q1": "What is 1 nautical mile in kilometers?", "q2": "What is 1 mile in kilometers?", "label": 0, "category": "unit_change", "source": "near_miss", "verified": false}
+{"id": "nm_unit_change_016", "q1": "How many watts in a kilowatt?", "q2": "How many watts in a horsepower?", "label": 0, "category": "unit_change", "source": "near_miss", "verified": false}
+{"id": "nm_unit_change_017", "q1": "Convert 2 liters to cups", "q2": "Convert 2 cups to liters", "label": 0, "category": "unit_change", "source": "near_miss", "verified": false}
+{"id": "nm_unit_change_018", "q1": "How many bytes in a kilobyte?", "q2": "How many bits in a kilobyte?", "label": 0, "category": "unit_change", "source": "near_miss", "verified": false}
+{"id": "nm_unit_change_019", "q1": "What is 72 hours in days?", "q2": "What is 72 hours in minutes?", "label": 0, "category": "unit_change", "source": "near_miss", "verified": false}
+{"id": "nm_unit_change_020", "q1": "How many hectares in a square kilometer?", "q2": "How many acres in a square kilometer?", "label": 0, "category": "unit_change", "source": "near_miss", "verified": false}
+{"id": "nm_unit_change_021", "q1": "Convert 500 grams to ounces", "q2": "Convert 500 grams to pounds", "label": 0, "category": "unit_change", "source": "near_miss", "verified": false}
+{"id": "nm_unit_change_022", "q1": "How many feet in a mile?", "q2": "How many yards in a mile?", "label": 0, "category": "unit_change", "source": "near_miss", "verified": false}
+{"id": "nm_unit_change_023", "q1": "Convert 3 atmospheres to pascals", "q2": "Convert 3 atmospheres to bar", "label": 0, "category": "unit_change", "source": "near_miss", "verified": false}
+{"id": "nm_unit_change_024", "q1": "What is the speed of light in km per second?", "q2": "What is the speed of light in miles per second?", "label": 0, "category": "unit_change", "source": "near_miss", "verified": false}
+{"id": "nm_unit_change_025", "q1": "How many cups in a quart?", "q2": "How many cups in a pint?", "label": 0, "category": "unit_change", "source": "near_miss", "verified": false}
+{"id": "nm_unit_change_026", "q1": "Convert 100 Kelvin to Celsius", "q2": "Convert 100 Celsius to Kelvin", "label": 0, "category": "unit_change", "source": "near_miss", "verified": false}
+{"id": "nm_unit_change_027", "q1": "How many liters in a cubic meter?", "q2": "How many gallons in a cubic meter?", "label": 0, "category": "unit_change", "source": "near_miss", "verified": false}
+{"id": "nm_unit_change_028", "q1": "How many joules in a calorie?", "q2": "How many joules in a kilocalorie?", "label": 0, "category": "unit_change", "source": "near_miss", "verified": false}
+{"id": "nm_unit_change_029", "q1": "Convert 12 inches to cm", "q2": "Convert 12 cm to inches", "label": 0, "category": "unit_change", "source": "near_miss", "verified": false}
+{"id": "nm_unit_change_030", "q1": "How many days in a leap year?", "q2": "How many weeks in a leap year?", "label": 0, "category": "unit_change", "source": "near_miss", "verified": false}
+{"id": "nm_unit_change_031", "q1": "What is 1 light year in kilometers?", "q2": "What is 1 light year in miles?", "label": 0, "category": "unit_change", "source": "near_miss", "verified": false}
+{"id": "nm_unit_change_032", "q1": "How many kilobytes in a megabyte?", "q2": "How many megabytes in a gigabyte?", "label": 0, "category": "unit_change", "source": "near_miss", "verified": false}
+{"id": "nm_unit_change_033", "q1": "Convert 8 stone to kg", "q2": "Convert 8 stone to pounds", "label": 0, "category": "unit_change", "source": "near_miss", "verified": false}
+{"id": "nm_unit_change_034", "q1": "How many grams in an ounce?", "q2": "How many grams in a troy ounce?", "label": 0, "category": "unit_change", "source": "near_miss", "verified": false}
+{"id": "nm_unit_change_035", "q1": "What is 90 degrees in radians?", "q2": "What is 90 radians in degrees?", "label": 0, "category": "unit_change", "source": "near_miss", "verified": false}
+{"id": "nm_unit_change_036", "q1": "How many mg in a gram?", "q2": "How many mcg in a gram?", "label": 0, "category": "unit_change", "source": "near_miss", "verified": false}
+{"id": "nm_unit_change_037", "q1": "Convert 1000 meters to miles", "q2": "Convert 1000 meters to yards", "label": 0, "category": "unit_change", "source": "near_miss", "verified": false}
+{"id": "nm_unit_change_038", "q1": "How much is a pint in ml in the UK?", "q2": "How much is a pint in ml in the US?", "label": 0, "category": "unit_change", "source": "near_miss", "verified": false}
+{"id": "nm_unit_change_039", "q1": "How many hours in a year?", "q2": "How many hours in a decade?", "label": 0, "category": "unit_change", "source": "near_miss", "verified": false}
+{"id": "nm_same_topic_different_question_000", "q1": "How do I install Python on Windows?", "q2": "How do I uninstall Python on Windows?", "label": 0, "category": "same_topic_different_question", "source": "near_miss", "verified": false}
+{"id": "nm_same_topic_different_question_001", "q1": "What are the symptoms of diabetes?", "q2": "What causes diabetes?", "label": 0, "category": "same_topic_different_question", "source": "near_miss", "verified": false}
+{"id": "nm_same_topic_different_question_002", "q1": "How do I create a Git branch?", "q2": "How do I delete a Git branch?", "label": 0, "category": "same_topic_different_question", "source": "near_miss", "verified": false}
+{"id": "nm_same_topic_different_question_003", "q1": "What is the boiling point of water?", "q2": "What is the freezing point of water?", "label": 0, "category": "same_topic_different_question", "source": "near_miss", "verified": false}
+{"id": "nm_same_topic_different_question_004", "q1": "Who discovered penicillin?", "q2": "Who discovered insulin?", "label": 0, "category": "same_topic_different_question", "source": "near_miss", "verified": false}
+{"id": "nm_same_topic_different_question_005", "q1": "How many players are on a cricket team?", "q2": "How many players are on a rugby team?", "label": 0, "category": "same_topic_different_question", "source": "near_miss", "verified": false}
+{"id": "nm_same_topic_different_question_006", "q1": "What is the difference between a virus and bacteria?", "q2": "How do viruses replicate?", "label": 0, "category": "same_topic_different_question", "source": "near_miss", "verified": false}
+{"id": "nm_same_topic_different_question_007", "q1": "How do I lose weight?", "q2": "How do I gain weight?", "label": 0, "category": "same_topic_different_question", "source": "near_miss", "verified": false}
+{"id": "nm_same_topic_different_question_008", "q1": "What is the best way to learn guitar?", "q2": "What is the best way to tune a guitar?", "label": 0, "category": "same_topic_different_question", "source": "near_miss", "verified": false}
+{"id": "nm_same_topic_different_question_009", "q1": "How do I reset my router?", "q2": "How do I update my router firmware?", "label": 0, "category": "same_topic_different_question", "source": "near_miss", "verified": false}
+{"id": "nm_same_topic_different_question_010", "q1": "What is machine learning?", "q2": "What is deep learning?", "label": 0, "category": "same_topic_different_question", "source": "near_miss", "verified": false}
+{"id": "nm_same_topic_different_question_011", "q1": "How does a car engine work?", "q2": "How does an electric motor work?", "label": 0, "category": "same_topic_different_question", "source": "near_miss", "verified": false}
+{"id": "nm_same_topic_different_question_012", "q1": "What are the benefits of yoga?", "q2": "What are the risks of yoga?", "label": 0, "category": "same_topic_different_question", "source": "near_miss", "verified": false}
+{"id": "nm_same_topic_different_question_013", "q1": "How do I make cold brew coffee?", "q2": "How do I make espresso?", "label": 0, "category": "same_topic_different_question", "source": "near_miss", "verified": false}
+{"id": "nm_same_topic_different_question_014", "q1": "What is the largest ocean?", "q2": "What is the deepest ocean?", "label": 0, "category": "same_topic_different_question", "source": "near_miss", "verified": false}
+{"id": "nm_same_topic_different_question_015", "q1": "How do I start a SQL transaction?", "q2": "How do I roll back a SQL transaction?", "label": 0, "category": "same_topic_different_question", "source": "near_miss", "verified": false}
+{"id": "nm_same_topic_different_question_016", "q1": "What is a stack data structure?", "q2": "What is a queue data structure?", "label": 0, "category": "same_topic_different_question", "source": "near_miss", "verified": false}
+{"id": "nm_same_topic_different_question_017", "q1": "How do I write a cover letter?", "q2": "How do I write a resignation letter?", "label": 0, "category": "same_topic_different_question", "source": "near_miss", "verified": false}
+{"id": "nm_same_topic_different_question_018", "q1": "What are the causes of inflation?", "q2": "What are the effects of inflation?", "label": 0, "category": "same_topic_different_question", "source": "near_miss", "verified": false}
+{"id": "nm_same_topic_different_question_019", "q1": "How do I sort a list in ascending order?", "q2": "How do I sort a list in descending order?", "label": 0, "category": "same_topic_different_question", "source": "near_miss", "verified": false}
+{"id": "nm_same_topic_different_question_020", "q1": "What does a cardiologist do?", "q2": "What does a dermatologist do?", "label": 0, "category": "same_topic_different_question", "source": "near_miss", "verified": false}
+{"id": "nm_same_topic_different_question_021", "q1": "How do I encrypt a file?", "q2": "How do I decrypt a file?", "label": 0, "category": "same_topic_different_question", "source": "near_miss", "verified": false}
+{"id": "nm_same_topic_different_question_022", "q1": "What is the fastest land animal?", "q2": "What is the fastest bird?", "label": 0, "category": "same_topic_different_question", "source": "near_miss", "verified": false}
+{"id": "nm_same_topic_different_question_023", "q1": "How long should I boil an egg for a soft yolk?", "q2": "How long should I boil an egg for a hard yolk?", "label": 0, "category": "same_topic_different_question", "source": "near_miss", "verified": false}
+{"id": "nm_same_topic_different_question_024", "q1": "What is photosynthesis?", "q2": "What is cellular respiration?", "label": 0, "category": "same_topic_different_question", "source": "near_miss", "verified": false}
+{"id": "nm_same_topic_different_question_025", "q1": "How do plants absorb water?", "q2": "How do plants absorb nitrogen?", "label": 0, "category": "same_topic_different_question", "source": "near_miss", "verified": false}
+{"id": "nm_same_topic_different_question_026", "q1": "What is a mortgage?", "q2": "What is a reverse mortgage?", "label": 0, "category": "same_topic_different_question", "source": "near_miss", "verified": false}
+{"id": "nm_same_topic_different_question_027", "q1": "How do I merge two dictionaries?", "q2": "How do I compare two dictionaries?", "label": 0, "category": "same_topic_different_question", "source": "near_miss", "verified": false}
+{"id": "nm_same_topic_different_question_028", "q1": "What is the function of red blood cells?", "q2": "What is the function of white blood cells?", "label": 0, "category": "same_topic_different_question", "source": "near_miss", "verified": false}
+{"id": "nm_same_topic_different_question_029", "q1": "How do I improve my credit score?", "q2": "How do I check my credit score?", "label": 0, "category": "same_topic_different_question", "source": "near_miss", "verified": false}
+{"id": "nm_same_topic_different_question_030", "q1": "What are the advantages of solar energy?", "q2": "What are the disadvantages of solar energy?", "label": 0, "category": "same_topic_different_question", "source": "near_miss", "verified": false}
+{"id": "nm_same_topic_different_question_031", "q1": "How do I make a website responsive?", "q2": "How do I make a website accessible?", "label": 0, "category": "same_topic_different_question", "source": "near_miss", "verified": false}
+{"id": "nm_same_topic_different_question_032", "q1": "What is the smallest planet?", "q2": "What is the hottest planet?", "label": 0, "category": "same_topic_different_question", "source": "near_miss", "verified": false}
+{"id": "nm_same_topic_different_question_033", "q1": "How many bones does an adult human have?", "q2": "How many muscles does an adult human have?", "label": 0, "category": "same_topic_different_question", "source": "near_miss", "verified": false}
+{"id": "nm_same_topic_different_question_034", "q1": "How does TCP establish a connection?", "q2": "How does TCP close a connection?", "label": 0, "category": "same_topic_different_question", "source": "near_miss", "verified": false}
+{"id": "nm_same_topic_different_question_035", "q1": "How do I train for a marathon?", "q2": "How do I recover after a marathon?", "label": 0, "category": "same_topic_different_question", "source": "near_miss", "verified": false}
+{"id": "nm_same_topic_different_question_036", "q1": "What is the main function of the liver?", "q2": "What is the main function of the kidneys?", "label": 0, "category": "same_topic_different_question", "source": "near_miss", "verified": false}
+{"id": "nm_same_topic_different_question_037", "q1": "How do I convert a string to an integer in Python?", "q2": "How do I convert an integer to a string in Python?", "label": 0, "category": "same_topic_different_question", "source": "near_miss", "verified": false}
+{"id": "nm_same_topic_different_question_038", "q1": "What should I pack for a beach vacation?", "q2": "What should I pack for a ski vacation?", "label": 0, "category": "same_topic_different_question", "source": "near_miss", "verified": false}
+{"id": "nm_same_topic_different_question_039", "q1": "Why is the sky blue?", "q2": "Why is the sunset red?", "label": 0, "category": "same_topic_different_question", "source": "near_miss", "verified": false}
+{"id": "nm_paraphrase_000", "q1": "What is the capital of India?", "q2": "Which city is India's capital?", "label": 1, "category": "paraphrase", "source": "near_miss", "verified": false}
+{"id": "nm_paraphrase_001", "q1": "How do I learn Python quickly?", "q2": "What is the fastest way to learn Python?", "label": 1, "category": "paraphrase", "source": "near_miss", "verified": false}
+{"id": "nm_paraphrase_002", "q1": "How can I lose weight fast?", "q2": "What's the quickest way to lose weight?", "label": 1, "category": "paraphrase", "source": "near_miss", "verified": false}
+{"id": "nm_paraphrase_003", "q1": "Python 3.10 features", "q2": "What's new in Python 3.10?", "label": 1, "category": "paraphrase", "source": "near_miss", "verified": false}
+{"id": "nm_paraphrase_004", "q1": "How do I reverse a list in Python?", "q2": "Python: how to reverse a list?", "label": 1, "category": "paraphrase", "source": "near_miss", "verified": false}
+{"id": "nm_paraphrase_005", "q1": "What causes earthquakes?", "q2": "Why do earthquakes happen?", "label": 1, "category": "paraphrase", "source": "near_miss", "verified": false}
+{"id": "nm_paraphrase_006", "q1": "Who wrote Pride and Prejudice?", "q2": "Who is the author of Pride and Prejudice?", "label": 1, "category": "paraphrase", "source": "near_miss", "verified": false}
+{"id": "nm_paraphrase_007", "q1": "How many bones are in the human body?", "q2": "How many bones does the human body have?", "label": 1, "category": "paraphrase", "source": "near_miss", "verified": false}
+{"id": "nm_paraphrase_008", "q1": "What is the boiling point of water?", "q2": "At what temperature does water boil?", "label": 1, "category": "paraphrase", "source": "near_miss", "verified": false}
+{"id": "nm_paraphrase_009", "q1": "Convert 5 miles to km", "q2": "How many kilometers is 5 miles?", "label": 1, "category": "paraphrase", "source": "near_miss", "verified": false}
+{"id": "nm_paraphrase_010", "q1": "how do i make pancakes", "q2": "what is a good recipe for pancakes", "label": 1, "category": "paraphrase", "source": "near_miss", "verified": false}
+{"id": "nm_paraphrase_011", "q1": "What is machine learning?", "q2": "Can you explain what machine learning is?", "label": 1, "category": "paraphrase", "source": "near_miss", "verified": false}
+{"id": "nm_paraphrase_012", "q1": "Best way to learn guitar for beginners?", "q2": "How should a beginner learn guitar?", "label": 1, "category": "paraphrase", "source": "near_miss", "verified": false}
+{"id": "nm_paraphrase_013", "q1": "How do I center a div in CSS?", "q2": "CSS: how to center a div?", "label": 1, "category": "paraphrase", "source": "near_miss", "verified": false}
+{"id": "nm_paraphrase_014", "q1": "What is the speed of light?", "q2": "How fast does light travel?", "label": 1, "category": "paraphrase", "source": "near_miss", "verified": false}
+{"id": "nm_paraphrase_015", "q1": "Who painted the Mona Lisa?", "q2": "Who is the painter of the Mona Lisa?", "label": 1, "category": "paraphrase", "source": "near_miss", "verified": false}
+{"id": "nm_paraphrase_016", "q1": "What are the symptoms of diabetes?", "q2": "What are the signs of diabetes?", "label": 1, "category": "paraphrase", "source": "near_miss", "verified": false}
+{"id": "nm_paraphrase_017", "q1": "How do I delete a Git branch?", "q2": "How can I remove a branch in Git?", "label": 1, "category": "paraphrase", "source": "near_miss", "verified": false}
+{"id": "nm_paraphrase_018", "q1": "What is the square root of 144?", "q2": "What's the square root of 144?", "label": 1, "category": "paraphrase", "source": "near_miss", "verified": false}
+{"id": "nm_paraphrase_019", "q1": "Why is the sky blue?", "q2": "What makes the sky blue?", "label": 1, "category": "paraphrase", "source": "near_miss", "verified": false}
+{"id": "nm_paraphrase_020", "q1": "How do I improve my English speaking?", "q2": "How can I get better at speaking English?", "label": 1, "category": "paraphrase", "source": "near_miss", "verified": false}
+{"id": "nm_paraphrase_021", "q1": "What is the tallest mountain in the world?", "q2": "Which mountain is the highest in the world?", "label": 1, "category": "paraphrase", "source": "near_miss", "verified": false}
+{"id": "nm_paraphrase_022", "q1": "How do I stop procrastinating?", "q2": "What are ways to stop procrastination?", "label": 1, "category": "paraphrase", "source": "near_miss", "verified": false}
+{"id": "nm_paraphrase_023", "q1": "What is the population of Canada?", "q2": "How many people live in Canada?", "label": 1, "category": "paraphrase", "source": "near_miss", "verified": false}
+{"id": "nm_paraphrase_024", "q1": "Explain recursion", "q2": "What is recursion in programming?", "label": 1, "category": "paraphrase", "source": "near_miss", "verified": false}
+{"id": "nm_paraphrase_025", "q1": "How do I read a CSV file in Python?", "q2": "How to load a CSV file using Python?", "label": 1, "category": "paraphrase", "source": "near_miss", "verified": false}
+{"id": "nm_paraphrase_026", "q1": "What does DNA stand for?", "q2": "What is the full form of DNA?", "label": 1, "category": "paraphrase", "source": "near_miss", "verified": false}
+{"id": "nm_paraphrase_027", "q1": "How do vaccines work?", "q2": "How does a vaccine work in the body?", "label": 1, "category": "paraphrase", "source": "near_miss", "verified": false}
+{"id": "nm_paraphrase_028", "q1": "What is the largest planet in our solar system?", "q2": "Which planet is the biggest in the solar system?", "label": 1, "category": "paraphrase", "source": "near_miss", "verified": false}
+{"id": "nm_paraphrase_029", "q1": "How do I make cold brew coffee?", "q2": "What's the method for making cold brew coffee?", "label": 1, "category": "paraphrase", "source": "near_miss", "verified": false}
+{"id": "nm_paraphrase_030", "q1": "Who was the first man on the moon?", "q2": "Who was the first person to walk on the Moon?", "label": 1, "category": "paraphrase", "source": "near_miss", "verified": false}
+{"id": "nm_paraphrase_031", "q1": "What is 15% of 200?", "q2": "Calculate 15 percent of 200", "label": 1, "category": "paraphrase", "source": "near_miss", "verified": false}
+{"id": "nm_paraphrase_032", "q1": "How can I sleep better at night?", "q2": "What can I do to improve my sleep?", "label": 1, "category": "paraphrase", "source": "near_miss", "verified": false}
+{"id": "nm_paraphrase_033", "q1": "What is the difference between TCP and UDP?", "q2": "How is TCP different from UDP?", "label": 1, "category": "paraphrase", "source": "near_miss", "verified": false}
+{"id": "nm_paraphrase_034", "q1": "How do I install Docker on Ubuntu?", "q2": "Steps to install Docker on Ubuntu", "label": 1, "category": "paraphrase", "source": "near_miss", "verified": false}
+{"id": "nm_paraphrase_035", "q1": "What is inflation?", "q2": "Can you define inflation?", "label": 1, "category": "paraphrase", "source": "near_miss", "verified": false}
+{"id": "nm_paraphrase_036", "q1": "How do I write a cover letter?", "q2": "Tips for writing a cover letter", "label": 1, "category": "paraphrase", "source": "near_miss", "verified": false}
+{"id": "nm_paraphrase_037", "q1": "What is the meaning of life?", "q2": "What's the purpose of life?", "label": 1, "category": "paraphrase", "source": "near_miss", "verified": false}
+{"id": "nm_paraphrase_038", "q1": "Is coffee bad for health?", "q2": "Is coffee unhealthy?", "label": 1, "category": "paraphrase", "source": "near_miss", "verified": false}
+{"id": "nm_paraphrase_039", "q1": "How do I become a data scientist?", "q2": "What steps should I take to become a data scientist?", "label": 1, "category": "paraphrase", "source": "near_miss", "verified": false}
+{"id": "nm_paraphrase_040", "q1": "What is the GDP of Germany?", "q2": "How large is Germany's GDP?", "label": 1, "category": "paraphrase", "source": "near_miss", "verified": false}
+{"id": "nm_paraphrase_041", "q1": "How do airplanes fly?", "q2": "How does an airplane stay in the air?", "label": 1, "category": "paraphrase", "source": "near_miss", "verified": false}
+{"id": "nm_paraphrase_042", "q1": "how to get rid of acne", "q2": "what is the best way to remove acne", "label": 1, "category": "paraphrase", "source": "near_miss", "verified": false}
+{"id": "nm_paraphrase_043", "q1": "What are the benefits of meditation?", "q2": "Why is meditation good for you?", "label": 1, "category": "paraphrase", "source": "near_miss", "verified": false}
+{"id": "nm_paraphrase_044", "q1": "What is blockchain?", "q2": "Explain blockchain technology", "label": 1, "category": "paraphrase", "source": "near_miss", "verified": false}
+{"id": "nm_paraphrase_045", "q1": "Who discovered gravity?", "q2": "Who was the first to discover gravity?", "label": 1, "category": "paraphrase", "source": "near_miss", "verified": false}
+{"id": "nm_paraphrase_046", "q1": "How do I make my laptop faster?", "q2": "How can I speed up my laptop?", "label": 1, "category": "paraphrase", "source": "near_miss", "verified": false}
+{"id": "nm_paraphrase_047", "q1": "What is the currency of Japan?", "q2": "Which currency is used in Japan?", "label": 1, "category": "paraphrase", "source": "near_miss", "verified": false}
+{"id": "nm_paraphrase_048", "q1": "How many continents are there?", "q2": "What is the number of continents on Earth?", "label": 1, "category": "paraphrase", "source": "near_miss", "verified": false}
+{"id": "nm_paraphrase_049", "q1": "What is the best programming language for beginners?", "q2": "Which programming language should a beginner learn first?", "label": 1, "category": "paraphrase", "source": "near_miss", "verified": false}
+{"id": "nm_paraphrase_050", "q1": "How do I convert a list to a string in Python?", "q2": "Python convert list to string", "label": 1, "category": "paraphrase", "source": "near_miss", "verified": false}
+{"id": "nm_paraphrase_051", "q1": "What is the time complexity of binary search?", "q2": "What is binary search's time complexity?", "label": 1, "category": "paraphrase", "source": "near_miss", "verified": false}
+{"id": "nm_paraphrase_052", "q1": "What is an API?", "q2": "What does API mean?", "label": 1, "category": "paraphrase", "source": "near_miss", "verified": false}
+{"id": "nm_paraphrase_053", "q1": "Translate \"thank you\" into French", "q2": "How do you say \"thank you\" in French?", "label": 1, "category": "paraphrase", "source": "near_miss", "verified": false}
+{"id": "nm_paraphrase_054", "q1": "What are some good books on investing?", "q2": "Can you recommend books about investing?", "label": 1, "category": "paraphrase", "source": "near_miss", "verified": false}
+{"id": "nm_paraphrase_055", "q1": "What is the factorial of 5?", "q2": "Compute 5 factorial", "label": 1, "category": "paraphrase", "source": "near_miss", "verified": false}
+{"id": "nm_paraphrase_056", "q1": "How does the stock market work?", "q2": "Can you explain how the stock market works?", "label": 1, "category": "paraphrase", "source": "near_miss", "verified": false}
+{"id": "nm_paraphrase_057", "q1": "What is the chemical formula of water?", "q2": "What is water's chemical formula?", "label": 1, "category": "paraphrase", "source": "near_miss", "verified": false}
+{"id": "nm_paraphrase_058", "q1": "How do I tie a tie?", "q2": "What are the steps to tie a necktie?", "label": 1, "category": "paraphrase", "source": "near_miss", "verified": false}
+{"id": "nm_paraphrase_059", "q1": "Why do cats purr?", "q2": "What makes cats purr?", "label": 1, "category": "paraphrase", "source": "near_miss", "verified": false}
+{"id": "nm_paraphrase_060", "q1": "How long should I boil an egg?", "q2": "How many minutes should an egg be boiled?", "label": 1, "category": "paraphrase", "source": "near_miss", "verified": false}
+{"id": "nm_paraphrase_061", "q1": "What is a black hole?", "q2": "Can you explain what black holes are?", "label": 1, "category": "paraphrase", "source": "near_miss", "verified": false}
+{"id": "nm_paraphrase_062", "q1": "How do I start a business?", "q2": "What are the steps to start a business?", "label": 1, "category": "paraphrase", "source": "near_miss", "verified": false}
+{"id": "nm_paraphrase_063", "q1": "What are the main causes of climate change?", "q2": "What causes climate change?", "label": 1, "category": "paraphrase", "source": "near_miss", "verified": false}
+{"id": "nm_paraphrase_064", "q1": "How do I find the area of a circle?", "q2": "What is the formula for the area of a circle?", "label": 1, "category": "paraphrase", "source": "near_miss", "verified": false}
+{"id": "nm_paraphrase_065", "q1": "How to prepare for a job interview?", "q2": "What is the best way to prepare for a job interview?", "label": 1, "category": "paraphrase", "source": "near_miss", "verified": false}
+{"id": "nm_paraphrase_066", "q1": "Who invented the telephone?", "q2": "Who is credited with inventing the telephone?", "label": 1, "category": "paraphrase", "source": "near_miss", "verified": false}
+{"id": "nm_paraphrase_067", "q1": "What is the difference between weather and climate?", "q2": "How is weather different from climate?", "label": 1, "category": "paraphrase", "source": "near_miss", "verified": false}
+{"id": "nm_paraphrase_068", "q1": "How do I set up a Python virtual environment?", "q2": "How to create a virtualenv in Python?", "label": 1, "category": "paraphrase", "source": "near_miss", "verified": false}
+{"id": "nm_paraphrase_069", "q1": "What is the longest river in the world?", "q2": "Which river is the longest on Earth?", "label": 1, "category": "paraphrase", "source": "near_miss", "verified": false}
+{"id": "nm_paraphrase_070", "q1": "How do I calculate compound interest?", "q2": "What's the formula for compound interest?", "label": 1, "category": "paraphrase", "source": "near_miss", "verified": false}
+{"id": "nm_paraphrase_071", "q1": "What foods are high in protein?", "q2": "Which foods have a lot of protein?", "label": 1, "category": "paraphrase", "source": "near_miss", "verified": false}
+{"id": "nm_paraphrase_072", "q1": "How do I make a website?", "q2": "What are the steps to build a website?", "label": 1, "category": "paraphrase", "source": "near_miss", "verified": false}
+{"id": "nm_paraphrase_073", "q1": "What is the Pythagorean theorem?", "q2": "Explain the Pythagorean theorem", "label": 1, "category": "paraphrase", "source": "near_miss", "verified": false}
+{"id": "nm_paraphrase_074", "q1": "How can I save money on groceries?", "q2": "Tips to spend less on groceries", "label": 1, "category": "paraphrase", "source": "near_miss", "verified": false}
+{"id": "nm_paraphrase_075", "q1": "What is the capital of Australia?", "q2": "Which city is the capital of Australia?", "label": 1, "category": "paraphrase", "source": "near_miss", "verified": false}
+{"id": "nm_paraphrase_076", "q1": "How do solar panels work?", "q2": "How does solar power generation work?", "label": 1, "category": "paraphrase", "source": "near_miss", "verified": false}
+{"id": "nm_paraphrase_077", "q1": "what is the difference between a list and a tuple in python", "q2": "Python list vs tuple differences", "label": 1, "category": "paraphrase", "source": "near_miss", "verified": false}
+{"id": "nm_paraphrase_078", "q1": "How do I deal with stress?", "q2": "What are good ways to manage stress?", "label": 1, "category": "paraphrase", "source": "near_miss", "verified": false}
+{"id": "nm_paraphrase_079", "q1": "What is the freezing point of water in Fahrenheit?", "q2": "At how many degrees Fahrenheit does water freeze?", "label": 1, "category": "paraphrase", "source": "near_miss", "verified": false}
+{"id": "nm_paraphrase_080", "q1": "How do I write a for loop in JavaScript?", "q2": "JavaScript for loop syntax", "label": 1, "category": "paraphrase", "source": "near_miss", "verified": false}
+{"id": "nm_paraphrase_081", "q1": "What is quantum computing?", "q2": "Can you explain quantum computing in simple terms?", "label": 1, "category": "paraphrase", "source": "near_miss", "verified": false}
+{"id": "nm_paraphrase_082", "q1": "Who is the author of Harry Potter?", "q2": "Who wrote the Harry Potter books?", "label": 1, "category": "paraphrase", "source": "near_miss", "verified": false}
+{"id": "nm_paraphrase_083", "q1": "How do I remove duplicates from a list in Python?", "q2": "Python: remove duplicate elements from a list", "label": 1, "category": "paraphrase", "source": "near_miss", "verified": false}
+{"id": "nm_paraphrase_084", "q1": "How many hours of sleep do adults need?", "q2": "How much sleep does an adult need per night?", "label": 1, "category": "paraphrase", "source": "near_miss", "verified": false}
+{"id": "nm_paraphrase_085", "q1": "What is the function of the heart?", "q2": "What does the heart do?", "label": 1, "category": "paraphrase", "source": "near_miss", "verified": false}
+{"id": "nm_paraphrase_086", "q1": "How do I fix a leaking faucet?", "q2": "How can I repair a dripping tap?", "label": 1, "category": "paraphrase", "source": "near_miss", "verified": false}
+{"id": "nm_paraphrase_087", "q1": "What is SQL injection?", "q2": "Explain what an SQL injection attack is", "label": 1, "category": "paraphrase", "source": "near_miss", "verified": false}
+{"id": "nm_paraphrase_088", "q1": "Why do leaves change color in autumn?", "q2": "What makes leaves turn colors in the fall?", "label": 1, "category": "paraphrase", "source": "near_miss", "verified": false}
+{"id": "nm_paraphrase_089", "q1": "How do I choose a good laptop?", "q2": "What should I look for when buying a laptop?", "label": 1, "category": "paraphrase", "source": "near_miss", "verified": false}
+{"id": "nm_paraphrase_090", "q1": "What is the formula for kinetic energy?", "q2": "How do you calculate kinetic energy?", "label": 1, "category": "paraphrase", "source": "near_miss", "verified": false}
+{"id": "nm_paraphrase_091", "q1": "How do I get a US visa?", "q2": "What is the process for getting a visa to the US?", "label": 1, "category": "paraphrase", "source": "near_miss", "verified": false}
+{"id": "nm_paraphrase_092", "q1": "What is the best way to learn a new language?", "q2": "How can I learn a new language effectively?", "label": 1, "category": "paraphrase", "source": "near_miss", "verified": false}
+{"id": "nm_paraphrase_093", "q1": "What is Docker used for?", "q2": "What is the purpose of Docker?", "label": 1, "category": "paraphrase", "source": "near_miss", "verified": false}
+{"id": "nm_paraphrase_094", "q1": "How many legs does a spider have?", "q2": "How many legs do spiders have?", "label": 1, "category": "paraphrase", "source": "near_miss", "verified": false}
+{"id": "nm_paraphrase_095", "q1": "What are the health benefits of green tea?", "q2": "Is green tea good for your health?", "label": 1, "category": "paraphrase", "source": "near_miss", "verified": false}
+{"id": "nm_paraphrase_096", "q1": "How do I write a resume?", "q2": "What are tips for writing a good resume?", "label": 1, "category": "paraphrase", "source": "near_miss", "verified": false}
+{"id": "nm_paraphrase_097", "q1": "What is the difference between RAM and ROM?", "q2": "How does RAM differ from ROM?", "label": 1, "category": "paraphrase", "source": "near_miss", "verified": false}
+{"id": "nm_paraphrase_098", "q1": "How do I make friends as an adult?", "q2": "How can adults make new friends?", "label": 1, "category": "paraphrase", "source": "near_miss", "verified": false}
+{"id": "nm_paraphrase_099", "q1": "What is the speed of sound?", "q2": "How fast does sound travel?", "label": 1, "category": "paraphrase", "source": "near_miss", "verified": false}

@@ -1,0 +1,41 @@
+{"model": "openai/gpt-oss-20b", "id": "math_309", "source": "math", "ok": null, "error": "HTTP 429: {\"error\":{\"message\":\"Rate limit reached for model `openai/gpt-oss-20b` in organization `org_01kmysbwe8e15bs7yp"}
+{"model": "openai/gpt-oss-20b", "id": "math_92", "source": "math", "ok": null, "error": "HTTP 429: {\"error\":{\"message\":\"Rate limit reached for model `openai/gpt-oss-20b` in organization `org_01kmysbwe8e15bs7yp"}
+{"model": "openai/gpt-oss-20b", "id": "math_6", "source": "math", "ok": null, "error": "HTTP 429: {\"error\":{\"message\":\"Rate limit reached for model `openai/gpt-oss-20b` in organization `org_01kmysbwe8e15bs7yp"}
+{"model": "openai/gpt-oss-20b", "id": "math_71", "source": "math", "ok": null, "error": "HTTP 429: {\"error\":{\"message\":\"Rate limit reached for model `openai/gpt-oss-20b` in organization `org_01kmysbwe8e15bs7yp"}
+{"model": "gemini-3.8-flash", "id": "math_309", "source": "math", "ok": null, "error": "HTTP 429: [{\n  \"error\": {\n    \"code\": 429,\n    \"message\": \"You exceeded your current quota, please check your plan and b"}
+{"model": "openai/gpt-oss-20b", "id": "math_409", "source": "math", "ok": null, "error": "HTTP 429: {\"error\":{\"message\":\"Rate limit reached for model `openai/gpt-oss-20b` in organization `org_01kmysbwe8e15bs7yp"}
+{"model": "openai/gpt-oss-20b", "id": "math_24", "source": "math", "ok": null, "error": "HTTP 429: {\"error\":{\"message\":\"Rate limit reached for model `openai/gpt-oss-20b` in organization `org_01kmysbwe8e15bs7yp"}
+{"model": "openai/gpt-oss-20b", "id": "math_470", "source": "math", "ok": null, "error": "HTTP 429: {\"error\":{\"message\":\"Rate limit reached for model `openai/gpt-oss-20b` in organization `org_01kmysbwe8e15bs7yp"}
+{"model": "gemini-3.8-flash", "id": "math_92", "source": "math", "ok": null, "error": "HTTP 429: [{\n  \"error\": {\n    \"code\": 429,\n    \"message\": \"You exceeded your current quota, please check your plan and b"}
+{"model": "gemini-3.8-flash", "id": "math_6", "source": "math", "ok": null, "error": "HTTP 429: [{\n  \"error\": {\n    \"code\": 429,\n    \"message\": \"You exceeded your current quota, please check your plan and b"}
+{"model": "openai/gpt-oss-120b", "id": "math_309", "source": "math", "ok": true, "tin": 106, "tout": 1003, "finish": "stop"}
+{"model": "openai/gpt-oss-120b", "id": "math_92", "source": "math", "ok": true, "tin": 123, "tout": 405, "finish": "stop"}
+{"model": "openai/gpt-oss-120b", "id": "math_6", "source": "math", "ok": true, "tin": 102, "tout": 448, "finish": "stop"}
+{"model": "openai/gpt-oss-120b", "id": "math_71", "source": "math", "ok": true, "tin": 103, "tout": 910, "finish": "stop"}
+{"model": "openai/gpt-oss-120b", "id": "math_409", "source": "math", "ok": true, "tin": 142, "tout": 998, "finish": "stop"}
+{"model": "openai/gpt-oss-120b", "id": "math_24", "source": "math", "ok": true, "tin": 180, "tout": 625, "finish": "stop"}
+{"model": "openai/gpt-oss-120b", "id": "math_470", "source": "math", "ok": true, "tin": 133, "tout": 831, "finish": "stop"}
+{"model": "gemini-3.8-flash", "id": "math_71", "source": "math", "ok": null, "error": "HTTP 429: [{\n  \"error\": {\n    \"code\": 429,\n    \"message\": \"You exceeded your current quota, please check your plan and b"}
+{"model": "gemini-3.8-flash", "id": "math_409", "source": "math", "ok": null, "error": "HTTP 429: [{\n  \"error\": {\n    \"code\": 429,\n    \"message\": \"You exceeded your current quota, please check your plan and b"}
+{"model": "gemini-3.8-flash", "id": "math_24", "source": "math", "ok": null, "error": "HTTP 429: [{\n  \"error\": {\n    \"code\": 429,\n    \"message\": \"You exceeded your current quota, please check your plan and b"}
+{"model": "gemini-3.8-flash", "id": "math_470", "source": "math", "ok": null, "error": "HTTP 429: [{\n  \"error\": {\n    \"code\": 429,\n    \"message\": \"You exceeded your current quota, please check your plan and b"}
+{"model": "openai/gpt-oss-20b", "id": "math_486", "source": "math", "ok": null, "error": "HTTP 429: {\"error\":{\"message\":\"Rate limit reached for model `openai/gpt-oss-20b` in organization `org_01kmysbwe8e15bs7yp"}
+{"model": "openai/gpt-oss-20b", "id": "math_66", "source": "math", "ok": null, "error": "HTTP 429: {\"error\":{\"message\":\"Rate limit reached for model `openai/gpt-oss-20b` in organization `org_01kmysbwe8e15bs7yp"}
+{"model": "openai/gpt-oss-20b", "id": "math_80", "source": "math", "ok": null, "error": "HTTP 429: {\"error\":{\"message\":\"Rate limit reached for model `openai/gpt-oss-20b` in organization `org_01kmysbwe8e15bs7yp"}
+{"model": "gemini-3.8-flash", "id": "math_486", "source": "math", "ok": null, "error": "HTTP 429: [{\n  \"error\": {\n    \"code\": 429,\n    \"message\": \"You exceeded your current quota, please check your plan and b"}
+{"model": "openai/gpt-oss-20b", "id": "math_256", "source": "math", "ok": null, "error": "HTTP 429: {\"error\":{\"message\":\"Rate limit reached for model `openai/gpt-oss-20b` in organization `org_01kmysbwe8e15bs7yp"}
+{"model": "openai/gpt-oss-20b", "id": "math_180", "source": "math", "ok": null, "error": "HTTP 429: {\"error\":{\"message\":\"Rate limit reached for model `openai/gpt-oss-20b` in organization `org_01kmysbwe8e15bs7yp"}
+{"model": "openai/gpt-oss-20b", "id": "math_11", "source": "math", "ok": null, "error": "HTTP 429: {\"error\":{\"message\":\"Rate limit reached for model `openai/gpt-oss-20b` in organization `org_01kmysbwe8e15bs7yp"}
+{"model": "openai/gpt-oss-20b", "id": "math_22", "source": "math", "ok": null, "error": "HTTP 429: {\"error\":{\"message\":\"Rate limit reached for model `openai/gpt-oss-20b` in organization `org_01kmysbwe8e15bs7yp"}
+{"model": "gemini-3.8-flash", "id": "math_66", "source": "math", "ok": null, "error": "HTTP 429: [{\n  \"error\": {\n    \"code\": 429,\n    \"message\": \"You exceeded your current quota, please check your plan and b"}
+{"model": "openai/gpt-oss-120b", "id": "math_486", "source": "math", "ok": true, "tin": 123, "tout": 271, "finish": "stop"}
+{"model": "gemini-3.8-flash", "id": "math_80", "source": "math", "ok": null, "error": "HTTP 429: [{\n  \"error\": {\n    \"code\": 429,\n    \"message\": \"You exceeded your current quota, please check your plan and b"}
+{"model": "gemini-3.8-flash", "id": "math_256", "source": "math", "ok": null, "error": "HTTP 429: [{\n  \"error\": {\n    \"code\": 429,\n    \"message\": \"You exceeded your current quota, please check your plan and b"}
+{"model": "openai/gpt-oss-120b", "id": "math_66", "source": "math", "ok": true, "tin": 121, "tout": 362, "finish": "stop"}
+{"model": "openai/gpt-oss-120b", "id": "math_80", "source": "math", "ok": false, "tin": 126, "tout": 1500, "finish": "length"}
+{"model": "openai/gpt-oss-120b", "id": "math_256", "source": "math", "ok": true, "tin": 110, "tout": 217, "finish": "stop"}
+{"model": "openai/gpt-oss-120b", "id": "math_180", "source": "math", "ok": true, "tin": 99, "tout": 223, "finish": "stop"}
+{"model": "openai/gpt-oss-120b", "id": "math_11", "source": "math", "ok": false, "tin": 143, "tout": 1144, "finish": "stop"}
+{"model": "openai/gpt-oss-120b", "id": "math_22", "source": "math", "ok": true, "tin": 206, "tout": 641, "finish": "stop"}
+{"model": "openai/gpt-oss-120b", "id": "math_251", "source": "math", "ok": true, "tin": 190, "tout": 495, "finish": "stop"}
+{"model": "openai/gpt-oss-120b", "id": "math_450", "source": "math", "ok": true, "tin": 117, "tout": 542, "finish": "stop"}

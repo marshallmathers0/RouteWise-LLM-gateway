@@ -50,6 +50,13 @@ reliability:
   backoff_max_s: 8.0
   breaker_failure_threshold: 5  # consecutive failures that open the circuit
   breaker_cooldown_s: 30.0      # how long an open circuit stays open before a half-open probe
+  # Cost guard. A FALLBACK model is skipped if its input or output price per token is above
+  # this multiple of the always-strong reference model (counterfactual_strong_model below).
+  # Why: the live dashboard showed NEGATIVE savings when cheap traffic fell back to Gemini
+  # Flash-Lite ($2.50/1M output vs $0.60 for the strong model). With the guard, RouteWise
+  # returns 503 rather than overspending; set to null to prefer availability over cost.
+  # A tier's first model and explicitly requested models are never blocked.
+  fallback_price_cap_ratio: 1.0
 
 rate_limit:
   enabled: true

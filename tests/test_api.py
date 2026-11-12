@@ -117,14 +117,31 @@ def test_opt_out_header_bypasses_cache(client):
     assert r["routewise"]["cache_status"]["status"] == "bypassed"
 
 
-def test_fallback_to_second_provider(client, fake_clients):
+def test_fallback_within_budget(client, fake_clients):
+    # gpt-oss-20b down -> gpt-oss-120b (same price as the always-strong reference: allowed).
+    fake_clients["groq"].failures = [ProviderError("down", provider="groq", status_code=503, retryable=True)] * 3
+    meta = client.post("/v1/chat/completions", json=chat_body(), headers=AUTH).json()["routewise"]
+    assert meta["model_used"] == "openai/gpt-oss-120b" and meta["fallback_used"] is True
+
+
+def test_cost_guard_skips_fallback_pricier_than_strong(client, fake_clients):
+    # Both Groq models down. Gemini Flash-Lite costs more per token than the strong model,
+    # so the cost guard skips it and the gateway returns 503 instead of overspending.
     fake_clients["groq"].always_fail = ProviderError("down", provider="groq", status_code=503, retryable=True)
-    r = client.post("/v1/chat/completions", json=chat_body(), headers=AUTH).json()
-    meta = r["routewise"]
-    assert meta["provider_used"] == "gemini" and meta["fallback_used"] is True
-    # Cheap chain: groq 20b -> groq 120b -> gemini. max_retries=2 -> 3 attempts per Groq model.
+    r = client.post("/v1/chat/completions", json=chat_body(), headers=AUTH)
+    assert r.status_code == 503
+    assert "gemini/gemini-3.5-flash-lite: skipped_over_budget" in r.json()["error"]["message"]
+    assert fake_clients["gemini"].calls == []
+    # Cheap chain: groq 20b -> groq 120b; max_retries=2 -> 3 attempts per Groq model.
     models_tried = [m for m, _ in fake_clients["groq"].calls]
     assert models_tried == ["openai/gpt-oss-20b"] * 3 + ["openai/gpt-oss-120b"] * 3
+
+
+def test_cost_guard_can_be_disabled(client, fake_clients, app_config):
+    app_config.reliability.fallback_price_cap_ratio = None  # availability over cost
+    fake_clients["groq"].always_fail = ProviderError("down", provider="groq", status_code=503, retryable=True)
+    meta = client.post("/v1/chat/completions", json=chat_body(), headers=AUTH).json()["routewise"]
+    assert meta["provider_used"] == "gemini" and meta["fallback_used"] is True
 
 
 def test_all_providers_fail_returns_503_and_logs(client, fake_clients, repo):

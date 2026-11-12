@@ -27,7 +27,7 @@ from routewise.api.schemas import (
 from routewise.cache.eligibility import check_eligibility
 from routewise.cache.exact import CachedAnswer, ExactCache, exact_cache_key
 from routewise.cache.semantic import SemanticCache, SemanticLookup, semantic_namespace
-from routewise.core.config import AppConfig, TierTarget
+from routewise.core.config import AppConfig, ModelPrice, TierTarget
 from routewise.core.pricing import estimate_cost_usd
 from routewise.providers.base import LLMClient, LLMRequest
 from routewise.reliability.circuit_breaker import CircuitBreaker
@@ -93,6 +93,13 @@ class Gateway:
         self.exact_cache = exact_cache
         self.router = router
         self.semantic_cache = semantic_cache
+
+    def _fallback_price_cap(self) -> ModelPrice | None:
+        ratio = self.cfg.reliability.fallback_price_cap_ratio
+        ref = self.cfg.pricing.get(self.cfg.counterfactual_strong_model)
+        if ratio is None or ref is None:
+            return None
+        return ModelPrice(input=ref.input * ratio, output=ref.output * ratio)
 
     # ---- model resolution -------------------------------------------------------------
     def _resolve(self, req: ChatCompletionRequest, timer: StageTimer) -> tuple[str, list[TierTarget], RouteDecision]:
@@ -201,7 +208,8 @@ class Gateway:
         )
         try:
             with timer.stage("llm"):
-                result = await call_with_fallback(chain, llm_req, self.clients, self.breaker, self.cfg.reliability)
+                result = await call_with_fallback(chain, llm_req, self.clients, self.breaker, self.cfg.reliability,
+                                                  pricing=self.cfg.pricing, price_cap=self._fallback_price_cap())
         except AllProvidersFailed as e:
             meta.latency_ms = {**timer.ms, "total": round((time.perf_counter() - t0) * 1000, 3)}
             record = self._log_record(req, meta, api_key, 0, 0, status_code=503, error=str(e))

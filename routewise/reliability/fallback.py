@@ -7,7 +7,7 @@ import logging
 from dataclasses import dataclass, field, replace
 from typing import Awaitable, Callable
 
-from routewise.core.config import ReliabilityConfig, TierTarget
+from routewise.core.config import ModelPrice, ReliabilityConfig, TierTarget
 from routewise.providers.base import LLMClient, LLMRequest, LLMResponse, ProviderError
 from routewise.reliability.circuit_breaker import CircuitBreaker
 from routewise.reliability.retry import retry_async
@@ -19,7 +19,7 @@ log = logging.getLogger(__name__)
 class AttemptRecord:
     provider: str
     model: str
-    outcome: str  # "ok" | "skipped_unconfigured" | "skipped_circuit_open" | "error"
+    outcome: str  # "ok" | "skipped_unconfigured" | "skipped_circuit_open" | "skipped_over_budget" | "error"
     error: str | None = None
 
 
@@ -44,9 +44,18 @@ async def call_with_fallback(
     breaker: CircuitBreaker,
     cfg: ReliabilityConfig,
     sleep: Callable[[float], Awaitable[None]] = asyncio.sleep,
+    pricing: dict[str, ModelPrice] | None = None,
+    price_cap: ModelPrice | None = None,
 ) -> FallbackResult:
+    """Try each target in order. `price_cap` (per-1M-token input/output limits) blocks
+    FALLBACK targets that would cost more than the cap; the first target is never blocked."""
     attempts: list[AttemptRecord] = []
-    for target in chain:
+    for i, target in enumerate(chain):
+        price = (pricing or {}).get(target.model)
+        if i > 0 and price_cap is not None and price is not None and (
+                price.input > price_cap.input or price.output > price_cap.output):
+            attempts.append(AttemptRecord(target.provider, target.model, "skipped_over_budget"))
+            continue
         client = clients.get(target.provider)
         if client is None or not client.is_configured():
             attempts.append(AttemptRecord(target.provider, target.model, "skipped_unconfigured"))

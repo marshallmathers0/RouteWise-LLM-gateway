@@ -12,7 +12,8 @@ data/router/*_errors.jsonl
 data/router/pipeline.log
 artifacts/router_candidates.joblib
 .idea/
-.vscode/
+.vscode/*
+!.vscode/tasks.json
 eval/cache_pairs.jsonl
 data/eval/
 data/*.log

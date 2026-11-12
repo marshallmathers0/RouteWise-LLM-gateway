@@ -38,6 +38,10 @@ class ReliabilityConfig(BaseModel):
     backoff_max_s: float = 8.0
     breaker_failure_threshold: int = 5
     breaker_cooldown_s: float = 30.0
+    # Cost guard: a FALLBACK model may cost at most this multiple of the always-strong
+    # reference model (counterfactual_strong_model), per input AND per output token.
+    # None = availability over cost (use every fallback whatever it costs).
+    fallback_price_cap_ratio: float | None = 1.0
 
 
 class RateLimitConfig(BaseModel):

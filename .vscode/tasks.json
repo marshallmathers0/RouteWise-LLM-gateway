@@ -1,0 +1,60 @@
+{
+  // RouteWise one-step tasks.
+  //   Ctrl+Shift+B                         -> "RouteWise: Start demo" (default build task)
+  //   Ctrl+Shift+P -> "Tasks: Run Task"    -> pick any task below
+  "version": "2.0.0",
+  "tasks": [
+    {
+      "label": "RouteWise: Start demo",
+      "detail": "Gateway (:8000) + playground/dashboard (:8501) in their own windows, then opens http://localhost:8501",
+      "type": "process",
+      "command": "cmd.exe",
+      "args": ["/d", "/c", "${workspaceFolder}\\start_demo.bat"],
+      "options": { "cwd": "${workspaceFolder}" },
+      "group": { "kind": "build", "isDefault": true },
+      "presentation": { "reveal": "always", "panel": "dedicated", "clear": true },
+      "problemMatcher": []
+    },
+    {
+      "label": "RouteWise: Stop demo",
+      "detail": "Closes the gateway and playground windows started by Start demo",
+      "type": "process",
+      "command": "cmd.exe",
+      "args": ["/d", "/c", "${workspaceFolder}\\stop_demo.bat"],
+      "options": { "cwd": "${workspaceFolder}" },
+      "presentation": { "reveal": "always", "panel": "dedicated", "clear": true },
+      "problemMatcher": []
+    },
+    {
+      "label": "RouteWise: Scripted CLI demo",
+      "detail": "Paraphrase hit, near-miss traps, time-sensitive bypass, routing (needs Start demo running)",
+      "type": "process",
+      "command": "${workspaceFolder}\\.venv\\Scripts\\python.exe",
+      "args": ["scripts\\demo.py"],
+      "options": { "cwd": "${workspaceFolder}", "env": { "PYTHONIOENCODING": "utf-8" } },
+      "presentation": { "reveal": "always", "panel": "dedicated", "clear": true },
+      "problemMatcher": []
+    },
+    {
+      "label": "RouteWise: Run tests",
+      "detail": "Fast test suite (mocked providers, no API calls)",
+      "type": "process",
+      "command": "${workspaceFolder}\\.venv\\Scripts\\python.exe",
+      "args": ["-m", "pytest", "-q", "-m", "not slow"],
+      "options": { "cwd": "${workspaceFolder}" },
+      "group": { "kind": "test", "isDefault": true },
+      "presentation": { "reveal": "always", "panel": "dedicated", "clear": true },
+      "problemMatcher": []
+    },
+    {
+      "label": "RouteWise: Router pipeline (resume)",
+      "detail": "Collect -> judge -> labels -> train -> evaluate; waits out free-tier daily quotas",
+      "type": "process",
+      "command": "${workspaceFolder}\\.venv\\Scripts\\python.exe",
+      "args": ["-u", "scripts\\run_router_pipeline.py"],
+      "options": { "cwd": "${workspaceFolder}" },
+      "presentation": { "reveal": "always", "panel": "dedicated" },
+      "problemMatcher": []
+    }
+  ]
+}

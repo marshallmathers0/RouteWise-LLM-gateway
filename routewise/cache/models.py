@@ -28,11 +28,24 @@ class Verifier(Protocol):
         ...
 
 
+def _load_cached_first(factory, model_name: str, device: str):
+    """Load from the local Hugging Face cache; only go online if the model isn't downloaded.
+
+    By default sentence-transformers checks huggingface.co on every start, even for cached
+    models: ~3 s of extra start-up here, and a stalled start when the network is slow or
+    offline. After the first download the gateway no longer needs the network to start.
+    """
+    try:
+        return factory(model_name, device=device, local_files_only=True)
+    except Exception:  # noqa: BLE001 - not cached yet (first run): download it
+        return factory(model_name, device=device)
+
+
 class SentenceTransformerEmbedder:
     def __init__(self, model_name: str = "BAAI/bge-small-en-v1.5", device: str = "cpu") -> None:
         from sentence_transformers import SentenceTransformer
 
-        self.model = SentenceTransformer(model_name, device=device)
+        self.model = _load_cached_first(SentenceTransformer, model_name, device)
         self.dim = int(self.model.get_embedding_dimension())
 
     def embed(self, texts: Sequence[str]) -> np.ndarray:
@@ -48,7 +61,7 @@ class CrossEncoderVerifier:
     def __init__(self, model_name: str = "cross-encoder/quora-distilroberta-base", device: str = "cpu") -> None:
         from sentence_transformers import CrossEncoder
 
-        self.model = CrossEncoder(model_name, device=device)
+        self.model = _load_cached_first(CrossEncoder, model_name, device)
 
     def score(self, pairs: Sequence[tuple[str, str]]) -> list[float]:
         if not pairs:

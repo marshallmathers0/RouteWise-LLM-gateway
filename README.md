@@ -295,3 +295,11 @@ sends its LLM calls through RouteWise (one small provider class, JSON mode prese
 See [REPORT.md](REPORT.md#limitations). In short: costs are estimates from list prices (free tiers cost $0),
 judge-based labels carry LLM-judge bias, the near-miss trap set was LLM-drafted and is small, the verifier was
 trained on Quora questions (so its Quora results are optimistic), and everything is English-only.
+
+# commads to run the frontend 
+ 
+ terminal 1: .\.venv\Scripts\python -m uvicorn routewise.main:app --port 8000
+
+ terminal 2: .\.venv\Scripts\python -m streamlit run dashboard\app.py 
+
+Then open http://localhost:8501.
